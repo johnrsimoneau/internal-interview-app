@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-sm-12">
         <ul class="nav nav-pills">
-            <li [class.active]="viewMode === 'questions'"><a (click)="viewMode='questions'">Questions</a></li>
+            <li [class.active]="viewMode === 'question-list'"><a (click)="viewMode='question-list'">Questions</a></li>
             <li [class.active]="viewMode === 'create-question'"><a (click)="viewMode='create-question'">Create Question</a></li>
         </ul>
 
         <div [ngSwitch]="viewMode">
-            <template [ngSwitchCase]="'questions'" ngSwitchDefault>
+            <template [ngSwitchCase]="'question-list'" ngSwitchDefault>
                 
                 <div class="row">
                     <div class="col-sm-12">
