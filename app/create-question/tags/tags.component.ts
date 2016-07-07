@@ -9,22 +9,17 @@ import { TagService } from './tag.service';
 })
 export class TagsComponent implements OnInit {
 
-    @Input() listOfTags:string[] = [];
+    @Input() selectedTags:string[] = [];
 
     availableTags: any[];
 
     addTag(value: string) {
-        this.listOfTags.push(value);
-    }
-
-    editTag(value: string) {
-        var index = this.listOfTags.indexOf(value);
-        this.listOfTags.splice(index, 1);
+        this.selectedTags.push(value);
     }
 
     removeTag(value: string) {
-        var index = this.listOfTags.indexOf(value);
-        this.listOfTags.splice(index, 1);
+        var index = this.selectedTags.indexOf(value);
+        this.selectedTags.splice(index, 1);
         
     }
 

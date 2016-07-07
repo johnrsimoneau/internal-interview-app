@@ -20,13 +20,13 @@ import { TagService } from './tags/tag.service';
 export class CreateQuestionComponent implements OnInit {
     dateCreated:any;
     listOfAnswers: string[] = [];
-    listOfTags: string[] = [];
+    selectedTags: string[] = [];
     levels = [
-            'Associate',
-            'Staff',
-            'Senior',
-            'Principal'
-        ];
+        'Associate',
+        'Staff',
+        'Senior',
+        'Principal'
+    ];
 
     constructor() { }
 

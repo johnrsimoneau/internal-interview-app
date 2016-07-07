@@ -15,20 +15,20 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label for="questionLevel">Level</label>
                 <select class="form-control" id="questionLevel" name="level">
-                        <option value="">Select</option>
-                        <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
-                    </select>
+                    <option value="">Select</option>
+                    <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
+                </select>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-sm-4">
-            <tags [listOfTags]></tags>
+        <div class="col-sm-12">
+            <tags [selectedTags]></tags>
         </div>
     </div>
 
