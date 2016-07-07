@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { QuestionListService } from './question-list/question-list.service';
+
 @Component({
     selector: 'interview-app',
     template: `
@@ -12,7 +14,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         </div>
         <dashboard></dashboard>
     `,
-    directives: [DashboardComponent]
+    directives: [DashboardComponent],
+    providers: [QuestionListService]
 })
 export class AppComponent { 
     title: string = "Cardinal Solutions Interview App";
