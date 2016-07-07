@@ -9,11 +9,11 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="tags">Available Tags</label>
-            <select class="form-control" id="tags" multiple>
+            <select class="form-control multiple-select" id="tags" multiple>
                 <option 
                     *ngFor="let tagFromServer of availableTags; let i = index;" 
                     value="{{tagFromServer.tag}}"
-                    (dblclick)="addTag(tagFromServer.tag)">
+                    (click)="addTag(tagFromServer.tag)">
                     {{tagFromServer.tag}}
                 </option>
             </select>
