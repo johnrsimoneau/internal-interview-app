@@ -14,7 +14,7 @@ import { QuestionListComponent } from './../question-list/question-list.componen
 })
 export class DashboardComponent implements OnInit {
     
-    viewMode = 'question-list';
+    viewMode = 'create-question';
     constructor() { }
 
     ngOnInit() { }

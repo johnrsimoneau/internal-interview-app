@@ -1,0 +1,11 @@
+<div class="form-group">
+    <label for="answer">Answer</label>
+    <input #newAnswer type="text" class="form-control" name="text" placeholder="Acceptable answer" id="answer" (keyup.enter)="addAnswer(newAnswer.value); newAnswer.value='';">
+    <p class="help-block">Hit 'Enter' to add an answer.</p>
+</div>
+<ul class="answer-list">
+    <li *ngFor="let answer of listOfAnswers; let i = index;">
+        <span>{{answer}}</span> 
+        <a class="btn btn-sm" (click)="removeAnswer(answer)"><i class="glyphicon glyphicon-trash"></i></a>
+    </li>
+</ul>
