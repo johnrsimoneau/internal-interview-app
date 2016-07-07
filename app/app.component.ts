@@ -19,5 +19,5 @@ import { QuestionListService } from './question-list/question-list.service';
     providers: [QuestionListService]
 })
 export class AppComponent { 
-    title: string = "Cardinal Solutions Interview App";
+    title: string = "Interview App";
 }
