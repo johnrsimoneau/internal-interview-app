@@ -1,11 +1,27 @@
 <div class="form-group">
     <label for="answer">Answer</label>
-    <input #newAnswer type="text" class="form-control" name="text" placeholder="Acceptable answer" id="answer" (keyup.enter)="addAnswer(newAnswer.value); newAnswer.value='';">
-    <p class="help-block">Hit 'Enter' to add an answer.</p>
+    <textarea #newAnswer type="text" class="form-control" name="text" placeholder="Acceptable answer" id="answer" (keyup.enter)="addAnswer(newAnswer.value); newAnswer.value='';"></textarea>
+    <p class="help-block">Hit 'Enter' to add an answer. You can add as many answers as needed.</p>
 </div>
-<ul class="answer-list">
-    <li *ngFor="let answer of listOfAnswers; let i = index;">
-        <span>{{answer}}</span> 
-        <a class="btn btn-sm" (click)="removeAnswer(answer)"><i class="glyphicon glyphicon-trash"></i></a>
-    </li>
-</ul>
+
+<div class="row" [hidden]="listOfAnswers.length === 0">
+    <div class="col-sm-12">
+        <h3>Possible Answers</h3>
+    </div>
+</div>
+
+<div class="answer-list">
+    <div class="row" *ngFor="let answer of listOfAnswers; let i = index;">
+        <div class="col-sm-11">
+            <div class="form-group">
+                <label [attr.for]="'answer' + i">Acceptable Answer {{i + 1}}</label>
+                <textarea type="text" value="{{answer}}" id="answer{{i}}" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <a class="btn btn-sm" (click)="removeAnswer(answer)">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </div>
+    </div>
+</div>

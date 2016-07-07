@@ -1,11 +1,32 @@
+<!-- 
 <div class="form-group">
     <label for="tags">Tags</label>
     <input #newTag type="text" class="form-control" name="text" placeholder="Tag" id="tags" (keyup.enter)="addTag(newTag.value); newTag.value='';">
     <p class="help-block">Hit 'Enter' to add a tag.</p>
 </div>
-<ul class="tag-list">
-    <li *ngFor="let tag of listOfTags; let i = index;">
-        <span>{{tag}}</span> 
-        <a class="btn btn-sm" (click)="removeTag(tag)"><i class="glyphicon glyphicon-trash"></i></a>
-    </li>
-</ul>
+-->
+
+<div class="form-group">
+    <label for="tags">Tags</label>
+    <select class="form-control" id="tags" multiple>
+        <option 
+            *ngFor="let tagFromServer of availableTags; let i = index;" 
+            value="{{tagFromServer.tag}}"
+            (dblclick)="addTag(tagFromServer.tag)">
+            {{tagFromServer.tag}}
+        </option>
+    </select>
+</div>
+
+<div class="row" [hidden]="listOfTags.length === 0">
+    <div class="col-sm-12">
+        <div class="tag-list">
+            <span class="tag" *ngFor="let tag of listOfTags; let i = index;">
+                {{tag}} 
+                <a class="btn btn-sm" (click)="removeTag(tag)">
+                    <i class="glyphicon glyphicon-remove-circle"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
