@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 

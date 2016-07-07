@@ -1,5 +1,25 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>Available Questions</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Level</th>
+                    <th>Question</th>
+                    <th>Tag</th>
+                    <th>Answer</th>
+                    <th>Company</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let question of questions">
+                    <td>{{question.level}}</td>
+                    <td>{{question.text}}</td>
+                    <td>{{question.tag}}</td>
+                    <td>{{question.answer}}</td>
+                    <td>{{question.company}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
