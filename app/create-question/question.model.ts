@@ -1,4 +1,4 @@
-export class Question {
+export class QuestionModel {
     constructor(
         public _id: string,
         public answer: string,

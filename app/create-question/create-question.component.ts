@@ -6,6 +6,8 @@ import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
 
+import { QuestionModel } from './question.model';
+
 @Component({
     moduleId: module.id,
     selector: 'create-question',
