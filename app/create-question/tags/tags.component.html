@@ -7,6 +7,7 @@
 -->
 <div class="row">
     <div class="col-sm-3">
+        <!-- 
         <div class="form-group">
             <label for="tags">Available Tags</label>
             <select class="form-control multiple-select" id="tags" multiple>
@@ -18,14 +19,25 @@
                 </option>
             </select>
         </div>
+        -->
+        <label for="tags">Available Tags</label>
+        <ul id="tags" class="available-tags">
+            <li
+                *ngFor="let tagFromServer of availableTags; let i = index;" 
+                value="{{tagFromServer.tag}}"
+                (click)="addTag(tagFromServer._id, tagFromServer.tag, tagFromServer.count)">
+                {{tagFromServer.tag}}
+            </li>
+        </ul>
     </div>
 
     <div class="col-sm-9" [hidden]="selectedTags.length === 0">
         <label>Selected Tags</label>
         <div class="tag-list">
-            <span class="tag" *ngFor="let tag of selectedTags; let i = index;">
-                {{tag}} 
-                <a class="btn btn-sm" (click)="removeTag(tag)">
+            <span class="tag" *ngFor="let selectedTag of selectedTags; let i = index;"
+                [attr.data-tag-id]="selectedTag._id">
+                {{selectedTag.tag}} 
+                <a class="btn btn-sm" (click)="removeTag(selectedTag.tag)">
                     <i class="glyphicon glyphicon-remove-circle"></i>
                 </a>
             </span>

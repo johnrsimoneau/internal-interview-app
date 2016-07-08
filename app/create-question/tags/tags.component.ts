@@ -13,8 +13,10 @@ export class TagsComponent implements OnInit {
 
     availableTags: any[];
 
-    addTag(value: string) {
-        this.selectedTags.push(value);
+    addTag(id:string, tag:string, count:number ) {
+        var object:any = {"_id": id, "tag": tag, "count": count };
+        this.selectedTags.push(object);
+        console.log(this.selectedTags);
     }
 
     removeTag(value: string) {
