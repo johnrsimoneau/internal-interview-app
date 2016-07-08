@@ -18,10 +18,27 @@ import { QuestionModel } from './question.model';
         TagsComponent
     ],
     providers: [
-        TagService
+        TagService,
+        QuestionModel
     ]
 })
 export class CreateQuestionComponent implements OnInit {
+
+    submitted = false;
+
+    model = new QuestionModel(
+        'What is your age?',
+        ['something', 'another'],
+        'Some age',
+        ['Another age', 'One more age', 'another age'],
+        'ACME',
+        null
+    );
+
+    onSubmit() {
+        this.submitted = true;
+    }
+
     dateCreated:any;
     listOfAnswers: string[] = [];
     selectedTags: string[] = [];
@@ -35,5 +52,8 @@ export class CreateQuestionComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
+
+    // Remove this when done creating the form
+    get diagnostic() { return JSON.stringify(this.model); }
 
 }
