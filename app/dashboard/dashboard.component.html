@@ -6,7 +6,7 @@
         </ul>
 
         <div [ngSwitch]="viewMode">
-            <template [ngSwitchCase]="'question-list'" ngSwitchDefault>
+            <template [ngSwitchCase]="'question-list'">
                 
                 <div class="row">
                     <div class="col-sm-12">
@@ -15,7 +15,7 @@
                 </div>
             </template>
 
-            <template [ngSwitchCase]="'create-question'">
+            <template [ngSwitchCase]="'create-question'" ngSwitchDefault>
                 <div class="row">
                     <div class="col-sm-12">
                         <create-question></create-question>

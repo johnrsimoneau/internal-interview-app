@@ -3,3 +3,41 @@
         <h2>Create Question</h2>
     </div>
 </div>
+
+<form>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label for="questionText">Question</label>
+                <input type="text" class="form-control" name="text" placeholder="Question" id="questionText">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="questionLevel">Level</label>
+                <select class="form-control" id="questionLevel" name="level">
+                    <option value="">Select</option>
+                    <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <tags [selectedTags]></tags>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-9">
+            <acceptable-answers [listOfAnswers]></acceptable-answers>
+        </div>
+    </div>
+
+    
+    
+</form>
