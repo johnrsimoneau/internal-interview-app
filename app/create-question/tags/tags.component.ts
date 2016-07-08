@@ -16,7 +16,6 @@ export class TagsComponent implements OnInit {
     addTag(id:string, tag:string, count:number ) {
         var object:any = {"_id": id, "tag": tag, "count": count };
         this.selectedTags.push(object);
-        console.log(this.selectedTags);
     }
 
     removeTag(value: string) {
