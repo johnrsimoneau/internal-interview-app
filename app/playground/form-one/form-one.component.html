@@ -12,6 +12,8 @@
                     id="skuInput" 
                     placeholder="SKU"
                     [formControl]="myForm.controls['sku']">
+                <div *ngIf="!myForm.controls['sku'].valid && myForm.controls['sku'].touched" class="error">SKU is invalid</div>
+                <div *ngIf="myForm.controls['sku'].hasError('required') && myForm.controls['sku'].touched" class="error">SKU is invalid</div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
