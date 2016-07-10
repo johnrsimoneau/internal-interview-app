@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormOneComponent } from './form-one/form-one.component';
+import { FormOneComponent } from './example-form/form-one.component';
 
 @Component({
     moduleId: module.id,
