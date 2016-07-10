@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12">
         <form 
-            #f="ngForm"
+            [formGroup]="myForm"
             (ngSubmit)="onSubmit(f.value)">
             <div class="form-group">
                 <label for="skuInput">SKU</label>
@@ -11,7 +11,7 @@
                     class="form-control"
                     id="skuInput" 
                     placeholder="SKU"
-                    name="sku" ngModel>
+                    [formControl]="myForm.controls['sku']">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
