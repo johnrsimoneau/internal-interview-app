@@ -1,1 +1,40 @@
 <h2>Complex Form Example</h2>
+
+<form
+    [formGroup]="complexForm"
+    (ngSubmit)="onSubmit(complexForm.value)"
+    novalidate>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input 
+            type="text"
+            class="form-control"
+            placeholder="First name"
+            id="firstName"
+            [formControl]="firstName"
+            required>
+        <div *ngIf="firstName.invalid || firstName.touched || clickedSubmit">
+            <div *ngIf="firstName.hasError('required')" class="alert alert-danger">First name is required.</div>
+            <div *ngIf="firstName.hasError('invalidFirstNameLength')" class="alert alert-danger">First name must be two or more characters.</div>            
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input 
+            type="text"
+            class="form-control" 
+            placeholder="Last name"
+            id="lastName"
+            [formControl]="lastName"
+            required>
+        <div *ngIf="lastName.invalid || lastName.touched || clickedSubmit">
+            <div *ngIf="lastName.hasError('required')" class="alert alert-danger">Last name is required</div>
+        </div>
+    </div>
+
+    <button 
+        type="submit" 
+        class="btn btn-primary">Submit</button>
+
+</form>

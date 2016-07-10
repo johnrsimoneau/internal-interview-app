@@ -1,0 +1,5 @@
+input[required],
+textarea[required],
+select[required] {
+    border-left: .5em solid #ccc;
+}
