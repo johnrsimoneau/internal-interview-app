@@ -1,12 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
     FORM_DIRECTIVES,
     REACTIVE_FORM_DIRECTIVES,
     FormBuilder,
+    FormControl,
     FormGroup,
     Validators,
     AbstractControl
 } from '@angular/forms';
+
+// Custom validation
+function skuValidator(control: FormControl): { [s:string]:boolean } {
+    if (!control.value.match(/^123/)) {
+        return { invalidSku: true};
+    }
+}
 
 @Component({
     moduleId: module.id,
@@ -17,24 +25,35 @@ import {
         REACTIVE_FORM_DIRECTIVES
     ]
 })
-export class FormOneComponent implements OnInit {
+export class FormOneComponent {
 
     myForm: FormGroup;
-    // OPTIONAL, you would have to do this for each input.
-    //sku: AbstractControl;
+    sku: AbstractControl;
 
     constructor(fb: FormBuilder) {
         this.myForm = fb.group({
-            'sku': ['', Validators.required]
+            'sku': ['', Validators.compose([
+                Validators.required, skuValidator
+            ])]
         });
-        // OPTIONAL, you would have to do this for each input
-        //this.sku = this.myForm.controls['sku'];
+
+        this.sku = this.myForm.controls['sku'];
+
+        this.sku.valueChanges.subscribe(
+            (value: string) => {
+                console.log('sku changed to: ', value);
+            }
+        );
+
+        this.myForm.valueChanges.subscribe(
+            (form: any) => {
+                console.log('form changed to ', form);
+            }
+        );
     }
 
     onSubmit(form: any) {
         console.log('You submitted:', form);
     }
-
-    ngOnInit() { }
 
 }

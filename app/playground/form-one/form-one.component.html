@@ -3,7 +3,7 @@
     <div class="col-sm-12">
         <form 
             [formGroup]="myForm"
-            (ngSubmit)="onSubmit(f.value)">
+            (ngSubmit)="onSubmit(myForm.value)">
             <div class="form-group">
                 <label for="skuInput">SKU</label>
                 <input 
@@ -11,9 +11,11 @@
                     class="form-control"
                     id="skuInput" 
                     placeholder="SKU"
-                    [formControl]="myForm.controls['sku']">
-                <div *ngIf="!myForm.controls['sku'].valid && myForm.controls['sku'].touched" class="error">SKU is invalid</div>
-                <div *ngIf="myForm.controls['sku'].hasError('required') && myForm.controls['sku'].touched" class="error">SKU is invalid</div>
+                    [formControl]="sku">
+                <div *ngIf="!sku.valid && sku.touched" class="error">
+                    <div *ngIf="sku.hasError('required') && sku.touched" class="error">SKU is invalid</div>
+                    <div *ngIf="sku.hasError('invalidSku') && sku.touched" class="error">SKU must begin with <tt>123</tt></div>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
