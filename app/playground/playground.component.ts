@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FormOneComponent } from './form-one/form-one.component';
+
 @Component({
     moduleId: module.id,
     selector: 'playground',
-    templateUrl: 'playground.component.html'
+    templateUrl: 'playground.component.html',
+    directives: [
+        FormOneComponent
+    ]
 })
 export class PlaygroundComponent implements OnInit {
     constructor() { }
