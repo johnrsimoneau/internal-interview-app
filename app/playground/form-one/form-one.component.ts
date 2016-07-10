@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: 'form-one.component.html'
 })
 export class FormOneComponent implements OnInit {
+    
+    onSubmit(form: any) {
+        console.log('You submitted:', form);
+    }
+
     constructor() { }
 
     ngOnInit() { }
