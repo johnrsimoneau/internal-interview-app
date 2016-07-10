@@ -21,7 +21,6 @@ export class TagsComponent implements OnInit {
     removeTag(value: string) {
         var index = this.selectedTags.indexOf(value);
         this.selectedTags.splice(index, 1);
-        
     }
 
     constructor(private _tagService: TagService) { }

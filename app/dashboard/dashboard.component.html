@@ -3,6 +3,7 @@
         <ul class="nav nav-pills">
             <li [class.active]="viewMode === 'question-list'"><a (click)="viewMode='question-list'">Questions</a></li>
             <li [class.active]="viewMode === 'create-question'"><a (click)="viewMode='create-question'">Create Question</a></li>
+            <li [class.active]="viewMode === 'playground'"><a (click)="viewMode='playground'">Playground</a></li>
         </ul>
 
         <div [ngSwitch]="viewMode">
@@ -22,6 +23,15 @@
                     </div>
                 </div>
             </template>
+
+            <template [ngSwitchCase]="'playground'" ngSwitchDefault>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <playground></playground>
+                    </div>
+                </div>
+            </template>
+
         </div>
 
     </div>

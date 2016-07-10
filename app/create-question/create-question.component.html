@@ -9,8 +9,16 @@
         <div class="col-sm-8">
             <div class="form-group">
                 <label for="questionText">Question</label>
-                <textarea type="text" class="form-control" name="text" placeholder="Question" id="questionText">
+                <textarea 
+                    type="text" 
+                    class="form-control"
+                    [(ngModel)]="model.text"
+                    name="text" 
+                    placeholder="Enter a question" 
+                    id="questionText"
+                    required>
                 </textarea>
+                <p class="help-text">TODO: remove this: {{ model.text }}</p>
             </div>
         </div>
     </div>
@@ -19,7 +27,14 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="company">Company</label>
-                <input type="text" id="company" class="form-control" placeholder="Company Name">
+                <input 
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="model.company"
+                    name="company"
+                    id="company"
+                    placeholder="Company Name">
+                <p class="help-text">TODO: remove this: {{ model.company }}</p>
             </div>
         </div>
     </div>
@@ -28,10 +43,16 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="questionLevel">Level</label>
-                <select class="form-control" id="questionLevel" name="level">
-                    <option value="">Select</option>
-                    <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
+                <select 
+                    class="form-control"
+                    [(ngModel)]="model.level"
+                    name="level" 
+                    id="questionLevel"
+                    required>
+                        <option value="">Select</option>
+                        <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
                 </select>
+                <p class="help-text">TODO: remove this: {{ model.level }}</p>
             </div>
         </div>
     </div>

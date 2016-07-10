@@ -18,17 +18,29 @@ import { QuestionModel } from './question.model';
         TagsComponent
     ],
     providers: [
-        TagService,
-        QuestionModel
+        TagService
     ]
 })
 export class CreateQuestionComponent implements OnInit {
 
     submitted = false;
+    dateCreated:any;
+    listOfAnswers: string[] = [];
+    selectedTags: any[];
+    levels = [
+        'Associate',
+        'Staff',
+        'Senior',
+        'Principal'
+    ];
 
     model = new QuestionModel(
         'What is your age?',
-        ['something', 'another'],
+        this.levels[2],
+        this.selectedTags = [
+            {"_id": "124", "tag": "angular", "count": 2},
+            {"_id": "345", "tag": "javascript", "count": 3}
+        ],
         'Some age',
         ['Another age', 'One more age', 'another age'],
         'ACME',
@@ -38,16 +50,6 @@ export class CreateQuestionComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
     }
-
-    dateCreated:any;
-    listOfAnswers: string[] = [];
-    selectedTags: string[] = [];
-    levels = [
-        'Associate',
-        'Staff',
-        'Senior',
-        'Principal'
-    ];
 
     constructor() { }
 

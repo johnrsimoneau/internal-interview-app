@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CreateQuestionComponent } from './../create-question/create-question.component';
 import { QuestionListComponent } from './../question-list/question-list.component';
+import { PlaygroundComponent } from './../playground/playground.component';
 
 @Component({
     moduleId: module.id,
@@ -9,12 +10,13 @@ import { QuestionListComponent } from './../question-list/question-list.componen
     templateUrl: 'dashboard.component.html',
     directives: [
         CreateQuestionComponent,
-        QuestionListComponent
+        QuestionListComponent,
+        PlaygroundComponent
     ]
 })
 export class DashboardComponent implements OnInit {
     
-    viewMode = 'create-question';
+    viewMode = 'playground';
     constructor() { }
 
     ngOnInit() { }
