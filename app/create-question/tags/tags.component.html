@@ -1,37 +1,5 @@
-<!-- 
-<div class="form-group">
-    <label for="tags">Tags</label>
-    <input #newTag type="text" class="form-control" name="text" placeholder="Tag" id="tags" (keyup.enter)="addTag(newTag.value); newTag.value='';">
-    <p class="help-block">Hit 'Enter' to add a tag.</p>
-</div>
--->
 <div class="row">
     <div class="col-sm-3">
-        <!-- ORIGINALLY PUTTING ALL TAGS IN A MULTISELECT DROPDOWN
-        <div class="form-group">
-            <label for="tags">Available Tags</label>
-            <select class="form-control multiple-select" id="tags" multiple>
-                <option 
-                    *ngFor="let tagFromServer of availableTags; let i = index;" 
-                    value="{{tagFromServer.tag}}"
-                    (click)="addTag(tagFromServer.tag)">
-                    {{tagFromServer.tag}}
-                </option>
-            </select>
-        </div>
-        -->
-
-        <!-- ORIGINALLY DISPLAYING ALL TAGS IN A LIST,
-        <label for="tags">Available Tags</label>
-        <ul id="tags" class="available-tags">
-            <li
-                *ngFor="let tagFromServer of availableTags; let i = index;" 
-                value="{{tagFromServer.tag}}"
-                (click)="addTag(tagFromServer._id, tagFromServer.tag, tagFromServer.count)">
-                {{tagFromServer.tag}}
-            </li>
-        </ul>
-        -->
         <div class="form-group">
             <label for="tagSearch">Tag Search (Click to add tags).</label>
             <input 
