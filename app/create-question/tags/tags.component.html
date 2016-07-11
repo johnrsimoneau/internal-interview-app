@@ -33,12 +33,13 @@
         </ul>
         -->
         <div class="form-group">
-            <label for="tagSearch">Tag Search</label>
+            <label for="tagSearch">Tag Search (Click to add tags).</label>
             <input 
                 type="text" 
                 class="form-control" 
                 #tagSearchInput 
                 (keyup)="searchTags(tagSearchInput.value)">
+            <p class="help-text min-height" *ngIf="noResults">No results found.</p>
         </div>
          <ul id="tags" class="available-tags">
             <li *ngFor="let tagFromServer of availableTags; let i = index;"

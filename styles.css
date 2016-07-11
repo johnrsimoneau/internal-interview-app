@@ -3,3 +3,7 @@ textarea[required],
 select[required] {
     border-left: .5em solid #ccc;
 }
+
+.help-text.min-height {
+    min-height: 20px;
+}

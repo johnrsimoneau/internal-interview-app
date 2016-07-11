@@ -1,33 +1,42 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { TagService } from './tag.service';
-import { ObjectToArrayPipe } from './../../pipes/objectToArray.pipe';
 
 @Component({
     moduleId: module.id,
     selector: 'tags',
-    templateUrl: 'tags.component.html',
-    pipes: [ObjectToArrayPipe]
+    templateUrl: 'tags.component.html'
 })
 export class TagsComponent implements OnInit {
     availableTags: Array<string>;
-    @Input() selectedTags:any[] = [];
+    noResults: boolean = false;
 
-    //availableTags: Observable<string[]>;
+    @Input() selectedTags:any[] = [];
 
     constructor(private _tagService: TagService) { }
 
     searchTags(term: string) {
-        this._tagService
-            .searchTags(term)
-            .filter(text => term.length >= 3)
-            .debounceTime(400)
-            .distinctUntilChanged()
-            .subscribe(
-                availableTags => this.availableTags = availableTags
-            )
+        this.noResults = false;
+        if (!term.length) {
+            this.availableTags = Array<string>()
+        } else {
+
+            this._tagService
+                .searchTags(term)
+                .filter(text => term.length >= 2)
+                .debounceTime(400)
+                .distinctUntilChanged()
+                .subscribe(
+                    availableTags => {
+                        if (availableTags.length) {
+                            this.availableTags = availableTags  
+                        } else {
+                            this.noResults = true;
+                        }
+                    }
+                )
             
-            // .then(availableTags => this.availableTags = availableTags);
+        }
     }
     addTag(id:string, tag:string, count:number ) {
         var object:any = {"_id": id, "tag": tag, "count": count };

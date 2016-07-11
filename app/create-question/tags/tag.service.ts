@@ -28,23 +28,6 @@ export class TagService {
 
     }
 
-    /* PROMISE BASED CALL
-    searchTags(term:string) {
-        let apiUrl = "http://localhost:1313/api/"
-        let params: string = [
-            `questionTags`,
-            `search`,
-            `${term}`
-        ].join('/');
-        let queryUrl: string = apiUrl + params;
-
-        return this._http
-            .get(queryUrl)
-            .toPromise()
-            .then(this._extractData)
-    }
-    */
-
     handleError(err:any) {
         console.log(err);
         // TODO: customize the message to be user-friendly
