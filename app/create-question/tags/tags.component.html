@@ -7,7 +7,7 @@
 -->
 <div class="row">
     <div class="col-sm-3">
-        <!-- 
+        <!-- ORIGINALLY PUTTING ALL TAGS IN A MULTISELECT DROPDOWN
         <div class="form-group">
             <label for="tags">Available Tags</label>
             <select class="form-control multiple-select" id="tags" multiple>
@@ -20,10 +20,28 @@
             </select>
         </div>
         -->
+
+        <!-- ORIGINALLY DISPLAYING ALL TAGS IN A LIST,
         <label for="tags">Available Tags</label>
         <ul id="tags" class="available-tags">
             <li
                 *ngFor="let tagFromServer of availableTags; let i = index;" 
+                value="{{tagFromServer.tag}}"
+                (click)="addTag(tagFromServer._id, tagFromServer.tag, tagFromServer.count)">
+                {{tagFromServer.tag}}
+            </li>
+        </ul>
+        -->
+        <div class="form-group">
+            <label for="tagSearch">Tag Search</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                #tagSearchInput 
+                (keyup)="searchTags(tagSearchInput.value)">
+        </div>
+         <ul id="tags" class="available-tags">
+            <li *ngFor="let tagFromServer of availableTags; let i = index;"
                 value="{{tagFromServer.tag}}"
                 (click)="addTag(tagFromServer._id, tagFromServer.tag, tagFromServer.count)">
                 {{tagFromServer.tag}}
