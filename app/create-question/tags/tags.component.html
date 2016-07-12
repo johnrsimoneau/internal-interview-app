@@ -18,10 +18,10 @@
         </ul>
     </div>
 
-    <div class="col-sm-9" [hidden]="selectedTags.length === 0">
+    <div class="col-sm-9" [hidden]="!chosenTags.length">
         <label>Selected Tags</label>
         <div class="tag-list">
-            <span class="tag" *ngFor="let selectedTag of selectedTags; let i = index;"
+            <span class="tag" *ngFor="let selectedTag of chosenTags; let i = index;"
                 [attr.data-tag-id]="selectedTag._id">
                 {{selectedTag.tag}} 
                 <a class="btn btn-sm" (click)="removeTag(selectedTag.tag)">

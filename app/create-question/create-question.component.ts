@@ -21,11 +21,19 @@ import { TagService } from './tags/tag.service';
 })
 export class CreateQuestionComponent implements OnInit {
     public otherAcceptableAnswers: any[];
+    public selectedTags: any[];
+
     enteredAnswers: string[];
+    enteredTags: any[];
 
     manageAcceptableAnswers(event: any) {
         this.otherAcceptableAnswers = event.value;
         this.enteredAnswers = this.otherAcceptableAnswers;
+    }
+
+    manageSelectedTags(event: any) {
+        this.selectedTags = event.value;
+        this.enteredTags = this.selectedTags;
     }
 
     removeAnswer(value: string) {

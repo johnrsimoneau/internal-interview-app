@@ -53,7 +53,14 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <tags [selectedTags]></tags>
+            <tags 
+                [sharedTagsArray]="selectedTags"
+                (selectedTagsChange)="manageSelectedTags($event)">
+            </tags>
+            <input 
+                type="hidden" 
+                class="form-control"
+                value="{{enteredTags | json}}">
         </div>
     </div>
 
@@ -81,8 +88,15 @@
                     [hidden]="otherAcceptableAnswers.length === 0">
                     <div class="col-sm-11">
                         <div class="form-group">
-                            <label [attr.for]="'answer' + i">Acceptable Answer {{i + 1}}</label>
-                            <textarea type="text" value="{{answer}}" id="answer{{i}}" class="form-control"></textarea>
+                            <label 
+                                [attr.for]="'answer' + i">
+                                Acceptable Answer {{i + 1}}
+                            </label>
+                            <textarea 
+                               value="{{answer}}"
+                               id="answer{{i}}"
+                               class="form-control">
+                            </textarea>
                         </div>
                     </div>
                     <div class="col-sm-1">

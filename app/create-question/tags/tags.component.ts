@@ -1,5 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { 
+    Component, 
+    OnInit, 
+    Input,
+    Output,
+    EventEmitter
+} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+
 import { TagService } from './tag.service';
 
 @Component({
@@ -7,13 +14,15 @@ import { TagService } from './tag.service';
     selector: 'tags',
     templateUrl: 'tags.component.html'
 })
-export class TagsComponent implements OnInit {
-    availableTags: Array<string>;
+export class TagsComponent {
+    availableTags: Array<any>;
     noResults: boolean = false;
+    chosenTags: any[] = [];
 
-    @Input() selectedTags:any[] = [];
+    @Input() sharedTagsArray:any[] = [];
+    @Output() selectedTagsChange = new EventEmitter();
 
-    constructor(private _tagService: TagService) { }
+    constructor( private _tagService: TagService ) { }
 
     searchTags(term: string) {
         this.noResults = false;
@@ -40,14 +49,20 @@ export class TagsComponent implements OnInit {
     }
     addTag(id:string, tag:string, count:number ) {
         var object:any = {"_id": id, "tag": tag, "count": count };
-        this.selectedTags.push(object);
+        this.chosenTags.push(object)
+        this.sharedTagsArray = this.chosenTags;
+        this.selectedTagsChange.emit({
+            value: this.sharedTagsArray
+        });
     }
 
     removeTag(value: string) {
-        var index = this.selectedTags.indexOf(value);
-        this.selectedTags.splice(index, 1);
+        var index = this.chosenTags.indexOf(value);
+        this.chosenTags.splice(index, 1);
+        this.sharedTagsArray = this.chosenTags;
+        this.selectedTagsChange.emit({
+            value: this.sharedTagsArray
+        });
     }
-
-    ngOnInit() {}
 
 }
