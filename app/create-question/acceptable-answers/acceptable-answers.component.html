@@ -5,6 +5,6 @@
 </div>
 <div class="form-group">
     <label for="answer">Answer</label>
-    <textarea #newAnswer type="text" class="form-control" name="text" placeholder="Acceptable answer" id="answer" (keyup.enter)="addAnswer(newAnswer.value); newAnswer.value='';"></textarea>
+    <textarea #newAnswer class="form-control" name="text" placeholder="Acceptable answer" id="answer" (keyup.enter)="addAnswer(newAnswer.value); newAnswer.value='';"></textarea>
     <p class="help-block">Hit 'Enter' to add an answer. You can add as many answers as needed.</p>
 </div>
