@@ -1,25 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { 
+    Component,
+    Input,
+    Output,
+    EventEmitter
+} from '@angular/core';
 
 @Component({
     moduleId: module.id,
     selector: 'acceptable-answers',
     templateUrl: 'acceptable-answers.component.html'
 })
-export class AcceptableAnswersComponent implements OnInit {
-    @Input() listOfAnswers:string[] = [];
+export class AcceptableAnswersComponent {
+    @Input() otherAcceptableAnswers:string[] = [];
+    @Output() acceptableAnswersChange = new EventEmitter();
 
     addAnswer(value: string) {
-        this.listOfAnswers.push(value);
-        console.log(this.listOfAnswers)
+        this.otherAcceptableAnswers.push(value);
+        console.log(this.otherAcceptableAnswers);
+        this.acceptableAnswersChange.emit({
+            value: this.otherAcceptableAnswers
+        })
     }
-
-    removeAnswer(value: string) {
-        var index = this.listOfAnswers.indexOf(value);
-        this.listOfAnswers.splice(index, 1);
-    }
-
-    constructor() { }
-
-    ngOnInit() { }
 
 }

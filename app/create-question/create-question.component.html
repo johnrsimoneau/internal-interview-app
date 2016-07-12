@@ -12,13 +12,11 @@
                 <textarea 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="model.text"
                     name="text" 
                     placeholder="Enter a question" 
                     id="questionText"
                     required>
                 </textarea>
-                <p class="help-text">TODO: remove this: {{ model.text }}</p>
             </div>
         </div>
     </div>
@@ -30,11 +28,9 @@
                 <input 
                     type="text"
                     class="form-control"
-                    [(ngModel)]="model.company"
                     name="company"
                     id="company"
                     placeholder="Company Name">
-                <p class="help-text">TODO: remove this: {{ model.company }}</p>
             </div>
         </div>
     </div>
@@ -45,14 +41,12 @@
                 <label for="questionLevel">Level</label>
                 <select 
                     class="form-control"
-                    [(ngModel)]="model.level"
                     name="level" 
                     id="questionLevel"
                     required>
                         <option value="">Select</option>
                         <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
                 </select>
-                <p class="help-text">TODO: remove this: {{ model.level }}</p>
             </div>
         </div>
     </div>
@@ -75,7 +69,29 @@
 
     <div class="row">
         <div class="col-sm-9">
-            <acceptable-answers [listOfAnswers]></acceptable-answers>
+            <acceptable-answers 
+                [shareAcceptableAnswers]="otherAcceptableAnswers"
+                (acceptableAnswersChange)="manageAcceptableAnswers($event);">
+            </acceptable-answers>
+
+            <div class="answer-list">
+                <div 
+                    class="row" 
+                    *ngFor="let answer of otherAcceptableAnswers; let i = index;" 
+                    [hidden]="otherAcceptableAnswers.length === 0">
+                    <div class="col-sm-11">
+                        <div class="form-group">
+                            <label [attr.for]="'answer' + i">Acceptable Answer {{i + 1}}</label>
+                            <textarea type="text" value="{{answer}}" id="answer{{i}}" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <a class="btn btn-sm" (click)="removeAnswer(answer)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

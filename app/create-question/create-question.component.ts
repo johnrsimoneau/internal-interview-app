@@ -5,7 +5,7 @@ import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
 
-import { QuestionModel } from './question.model';
+// import { QuestionModel } from './question.model';
 
 @Component({
     moduleId: module.id,
@@ -20,11 +20,24 @@ import { QuestionModel } from './question.model';
     ]
 })
 export class CreateQuestionComponent implements OnInit {
+    public otherAcceptableAnswers: any[];
+    enteredAnswers: string[];
+
+    manageAcceptableAnswers(event: any) {
+        this.otherAcceptableAnswers = event.value;
+        this.enteredAnswers = this.otherAcceptableAnswers;
+        console.log(this.enteredAnswers);
+    }
+
+    removeAnswer(value: string) {
+        var index = this.otherAcceptableAnswers.indexOf(value);
+        this.otherAcceptableAnswers.splice(index, 1);
+        console.log(this.otherAcceptableAnswers);
+    }
 
     submitted = false;
     dateCreated:any;
-    listOfAnswers: string[] = [];
-    selectedTags: any[];
+
     levels = [
         'Associate',
         'Staff',
@@ -32,6 +45,7 @@ export class CreateQuestionComponent implements OnInit {
         'Principal'
     ];
 
+/*
     model = new QuestionModel(
         'What is your age?',
         this.levels[2],
@@ -44,7 +58,7 @@ export class CreateQuestionComponent implements OnInit {
         'ACME',
         null
     );
-
+*/
     onSubmit() {
         this.submitted = true;
     }
