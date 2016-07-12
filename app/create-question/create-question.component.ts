@@ -65,7 +65,6 @@ export class CreateQuestionComponent implements OnInit {
 
     ngOnInit() { }
 
-    // Remove this when done creating the form
-    get diagnostic() { return JSON.stringify(this.model); }
+
 
 }
