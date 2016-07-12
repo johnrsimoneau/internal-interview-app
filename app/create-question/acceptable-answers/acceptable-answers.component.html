@@ -9,14 +9,11 @@
     <p class="help-block">Hit 'Enter' to add an answer. You can add as many answers as needed.</p>
 </div>
 
-<div class="row" [hidden]="listOfAnswers.length === 0">
-    <div class="col-sm-12">
-        <h3>Possible Answers</h3>
-    </div>
-</div>
-
 <div class="answer-list">
-    <div class="row" *ngFor="let answer of listOfAnswers; let i = index;">
+    <div 
+        class="row" 
+        *ngFor="let answer of listOfAnswers; let i = index;" 
+        [hidden]="listOfAnswers.length === 0">
         <div class="col-sm-11">
             <div class="form-group">
                 <label [attr.for]="'answer' + i">Acceptable Answer {{i + 1}}</label>
