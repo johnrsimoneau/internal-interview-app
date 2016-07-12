@@ -26,13 +26,11 @@ export class CreateQuestionComponent implements OnInit {
     manageAcceptableAnswers(event: any) {
         this.otherAcceptableAnswers = event.value;
         this.enteredAnswers = this.otherAcceptableAnswers;
-        console.log(this.enteredAnswers);
     }
 
     removeAnswer(value: string) {
         var index = this.otherAcceptableAnswers.indexOf(value);
         this.otherAcceptableAnswers.splice(index, 1);
-        console.log(this.otherAcceptableAnswers);
     }
 
     submitted = false;
