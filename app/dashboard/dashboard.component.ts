@@ -16,7 +16,7 @@ import { PlaygroundComponent } from './../playground/playground.component';
 })
 export class DashboardComponent implements OnInit {
     
-    viewMode = 'create-question';
+    viewMode = 'playground';
     constructor() { }
 
     ngOnInit() { }
