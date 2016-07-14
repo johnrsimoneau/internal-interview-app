@@ -13,6 +13,7 @@ import { AcceptableAnswersComponent } from './acceptable-answers/acceptable-answ
 import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
+import { QuestionService } from './../services/question.service';
 
 // import { QuestionModel } from './question.model';
 
@@ -36,7 +37,7 @@ export class CreateQuestionComponent implements OnInit {
 
     clickedSubmit = false;
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder, private _questionService: QuestionService) { }
 
     ngOnInit() {
         this.questionForm = this.fb.group({
@@ -81,7 +82,9 @@ export class CreateQuestionComponent implements OnInit {
 
     onSubmit(form: any) {
         if (this.questionForm.valid) {
+            console.log(form);
             console.log('You submitted ', form);
+            this._questionService.postQuestion(form);
         } else {
             console.log('errors');
             this.clickedSubmit = true;
