@@ -30,13 +30,33 @@
                     class="form-control"
                     placeholder="Enter a question" 
                     id="questionText"
-                    formControlName="questionText"
+                    formControlName="text"
                     required></textarea>
             </div>
-            <div *ngIf="questionForm.controls.questionText.touched && questionForm.controls.questionText.errors || 
-                        questionForm.controls.questionText.errors && clickedSubmit"
+            <div *ngIf="questionForm.controls.text.touched && questionForm.controls.text.errors || 
+                        questionForm.controls.text.errors && clickedSubmit"
                 class="alert alert-danger">
                 Question is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="technology">Technology</label>
+                <input 
+                    type="text"
+                    class="form-control"
+                    placeholder="Examples: JavaScript, Angular or .NET, etc." 
+                    id="technology"
+                    formControlName="tech"
+                    required>
+            </div>
+            <div *ngIf="questionForm.controls.tech.touched && questionForm.controls.tech.errors || 
+                        questionForm.controls.tech.errors && clickedSubmit"
+                class="alert alert-danger">
+                Technology is required.
             </div>
         </div>
     </div>
@@ -62,13 +82,13 @@
                 <select
                     class="form-control"
                     id="questionLevel"
-                    formControlName="questionLevel"
+                    formControlName="level"
                     required>
                         <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
                 </select>
             </div>
-            <div *ngIf="questionForm.controls.questionLevel.touched && questionForm.controls.questionLevel.errors || 
-                        questionForm.controls.questionLevel.errors && clickedSubmit"
+            <div *ngIf="questionForm.controls.level.touched && questionForm.controls.level.errors || 
+                        questionForm.controls.level.errors && clickedSubmit"
                 class="alert alert-danger">
                 Level is required.
             </div>
@@ -87,7 +107,7 @@
                 class="form-control"
                 ngModel="{{enteredTags | json}}"
                 id="questionTags"
-                formControlName="questionTags">
+                formControlName="tags">
                  <div *ngIf="enteredTags.length == 0 && clickedSubmit" 
                     class="alert alert-danger">
                     You must select at least one tag.
@@ -105,11 +125,11 @@
                     class="form-control" 
                     placeholder="Enter a preferred answer for this question" 
                     id="bestAnswer" 
-                    formControlName="bestAnswer"
+                    formControlName="preferredAnswers"
                     required></textarea>
             </div>
-            <div *ngIf="questionForm.controls.bestAnswer.touched && questionForm.controls.bestAnswer.errors || 
-                        questionForm.controls.bestAnswer.errors && clickedSubmit"
+            <div *ngIf="questionForm.controls.preferredAnswers.touched && questionForm.controls.preferredAnswers.errors || 
+                        questionForm.controls.preferredAnswers.errors && clickedSubmit"
                 class="alert alert-danger">
                 Preferred answer is required.
                 </div>
@@ -127,7 +147,7 @@
 
                 <input 
                     type="hidden" 
-                    formControlName="otherAnswers" 
+                    formControlName="answers" 
                     ngModel="{{ otherAcceptableAnswers | json }}"> 
                 <div 
                     class="row" 

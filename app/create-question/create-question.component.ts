@@ -41,12 +41,13 @@ export class CreateQuestionComponent implements OnInit {
     ngOnInit() {
         this.questionForm = this.fb.group({
             dateCreated: [],
-            questionText: ['', Validators.required],
+            text: ['', Validators.required],
+            tech: ['', Validators.required],
             company: [],
-            questionLevel: ['', Validators.required],
-            questionTags: ['', Validators.required],
-            bestAnswer: ['', Validators.required],
-            otherAnswers: [],
+            level: ['', Validators.required],
+            tags: ['', Validators.required],
+            preferredAnswers: ['', Validators.required],
+            answers: [],
         });
     }
 
