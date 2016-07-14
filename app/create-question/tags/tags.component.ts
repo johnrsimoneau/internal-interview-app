@@ -47,9 +47,8 @@ export class TagsComponent {
             
         }
     }
-    addTag(id:string, tag:string, count:number ) {
-        var object:any = {"_id": id, "tag": tag, "count": count };
-        this.chosenTags.push(object)
+    addTag(tag:string) {
+        this.chosenTags.push(tag);
         this.sharedTagsArray = this.chosenTags;
         this.selectedTagsChange.emit({
             value: this.sharedTagsArray

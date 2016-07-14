@@ -10,10 +10,10 @@
             <p class="help-text min-height" *ngIf="noResults">No results found.</p>
         </div>
          <ul id="tags" class="available-tags">
-            <li *ngFor="let tagFromServer of availableTags; let i = index;"
-                value="{{tagFromServer.tag}}"
-                (click)="addTag(tagFromServer._id, tagFromServer.tag, tagFromServer.count)">
-                {{tagFromServer.tag}}
+            <li *ngFor="let tag of availableTags; let i = index;"
+                value="{{tag.tag}}"
+                (click)="addTag(tag.tag)">
+                {{tag.tag}}
             </li>
         </ul>
     </div>
@@ -21,10 +21,9 @@
     <div class="col-sm-9" [hidden]="!chosenTags.length">
         <label>Selected Tags</label>
         <div class="tag-list">
-            <span class="tag" *ngFor="let selectedTag of chosenTags; let i = index;"
-                [attr.data-tag-id]="selectedTag._id">
-                {{selectedTag.tag}} 
-                <a class="btn btn-sm" (click)="removeTag(selectedTag.tag)">
+            <span class="tag" *ngFor="let selectedTag of chosenTags; let i = index;">
+                {{selectedTag}} 
+                <a class="btn btn-sm" (click)="removeTag(selectedTag)">
                     <i class="glyphicon glyphicon-remove-circle"></i>
                 </a>
             </span>
