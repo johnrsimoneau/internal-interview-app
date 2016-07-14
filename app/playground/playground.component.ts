@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ParentComponent } from './parent/parent.component';
-import { FormOneComponent } from './example-form/form-one.component';
-import { ComplexFormComponent } from './complex-form/complex-form.component';
+// import { FormOneComponent } from './example-form/form-one.component';
+// import { ComplexFormComponent } from './complex-form/complex-form.component';
 
 @Component({
     moduleId: module.id,
     selector: 'playground',
     templateUrl: 'playground.component.html',
     directives: [
-        ParentComponent,
-        FormOneComponent,
-        ComplexFormComponent
+        ParentComponent
     ]
 })
 export class PlaygroundComponent implements OnInit {

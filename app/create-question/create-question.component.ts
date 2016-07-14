@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import {
+    FORM_DIRECTIVES,
+    REACTIVE_FORM_DIRECTIVES,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    AbstractControl,
+    Validators
+} from '@angular/forms';
 
 import { AcceptableAnswersComponent } from './acceptable-answers/acceptable-answers.component';
 import { TagsComponent } from './tags/tags.component';
@@ -12,6 +21,8 @@ import { TagService } from './tags/tag.service';
     selector: 'create-question',
     templateUrl: 'create-question.component.html',
     directives: [
+        FORM_DIRECTIVES,
+        REACTIVE_FORM_DIRECTIVES,
         AcceptableAnswersComponent,
         TagsComponent
     ],
@@ -20,11 +31,30 @@ import { TagService } from './tags/tag.service';
     ]
 })
 export class CreateQuestionComponent implements OnInit {
+    dateCreated = new Date();
+    questionForm: FormGroup;
+
+    clickedSubmit = false;
+
+    constructor(private fb: FormBuilder) { }
+
+    ngOnInit() {
+        this.questionForm = this.fb.group({
+            dateCreated: [],
+            questionText: ['', Validators.required],
+            company: [],
+            questionLevel: ['', Validators.required],
+            questionTags: ['', Validators.required],
+            bestAnswer: ['', Validators.required],
+            otherAnswers: [],
+        });
+    }
+
     public otherAcceptableAnswers: any[];
     public selectedTags: any[];
 
     enteredAnswers: string[];
-    enteredTags: any[];
+    enteredTags: any[] = [];
 
     manageAcceptableAnswers(event: any) {
         this.otherAcceptableAnswers = event.value;
@@ -39,10 +69,7 @@ export class CreateQuestionComponent implements OnInit {
     removeAnswer(value: string) {
         var index = this.otherAcceptableAnswers.indexOf(value);
         this.otherAcceptableAnswers.splice(index, 1);
-    }
-
-    submitted = false;
-    dateCreated:any;
+    }   
 
     levels = [
         'Associate',
@@ -51,28 +78,13 @@ export class CreateQuestionComponent implements OnInit {
         'Principal'
     ];
 
-/*
-    model = new QuestionModel(
-        'What is your age?',
-        this.levels[2],
-        this.selectedTags = [
-            {"_id": "124", "tag": "angular", "count": 2},
-            {"_id": "345", "tag": "javascript", "count": 3}
-        ],
-        'Some age',
-        ['Another age', 'One more age', 'another age'],
-        'ACME',
-        null
-    );
-*/
-    onSubmit() {
-        this.submitted = true;
+    onSubmit(form: any) {
+        if (this.questionForm.valid) {
+            console.log('You submitted ', form);
+        } else {
+            console.log('errors');
+            this.clickedSubmit = true;
+            return;
+        }
     }
-
-    constructor() { }
-
-    ngOnInit() { }
-
-
-
 }

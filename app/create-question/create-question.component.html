@@ -4,7 +4,24 @@
     </div>
 </div>
 
-<form>
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit(questionForm.value)" novalidate>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="dateCreated">Date Created</label>
+                <input 
+                    type="text" 
+                    class="form-control"
+                    id="dateCreated"
+                    formControlName="dateCreated"
+                    ngModel="{{dateCreated | date:'MM/dd/yy'}}"
+                    disabled>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col-sm-8">
             <div class="form-group">
@@ -13,7 +30,13 @@
                     class="form-control"
                     placeholder="Enter a question" 
                     id="questionText"
+                    formControlName="questionText"
                     required></textarea>
+            </div>
+            <div *ngIf="questionForm.controls.questionText.touched && questionForm.controls.questionText.errors || 
+                        questionForm.controls.questionText.errors && clickedSubmit"
+                class="alert alert-danger">
+                Question is required.
             </div>
         </div>
     </div>
@@ -25,7 +48,7 @@
                 <input 
                     type="text"
                     class="form-control"
-                    name="company"
+                    formControlName="company"
                     id="company"
                     placeholder="Company Name">
             </div>
@@ -36,14 +59,18 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="questionLevel">Level</label>
-                <select 
+                <select
                     class="form-control"
-                    name="level" 
                     id="questionLevel"
+                    formControlName="questionLevel"
                     required>
-                        <option value="">Select</option>
                         <option *ngFor="let level of levels" value="{{level}}">{{level}}</option>
                 </select>
+            </div>
+            <div *ngIf="questionForm.controls.questionLevel.touched && questionForm.controls.questionLevel.errors || 
+                        questionForm.controls.questionLevel.errors && clickedSubmit"
+                class="alert alert-danger">
+                Level is required.
             </div>
         </div>
     </div>
@@ -55,19 +82,37 @@
                 (selectedTagsChange)="manageSelectedTags($event)">
             </tags>
             <input 
-                type="hidden" 
+                type="text"
+                style="display: none" 
                 class="form-control"
-                value="{{enteredTags | json}}">
+                ngModel="{{enteredTags | json}}"
+                id="questionTags"
+                formControlName="questionTags">
+                 <div *ngIf="enteredTags.length == 0 && clickedSubmit" 
+                    class="alert alert-danger">
+                    You must select at least one tag.
+                </div>
         </div>
+       
     </div>
 
     <div class="row">
         <div class="col-sm-9">
             <h3>Preferred Answer</h3>
             <div class="form-group">
-                <label for="preferredAnswer">Preferred Answer</label>
-                <textarea id="preferredAnswer" class="form-control" required></textarea>
+                <label for="bestAnswer">Preferred Answer</label>
+                <textarea 
+                    class="form-control" 
+                    placeholder="Enter a preferred answer for this question" 
+                    id="bestAnswer" 
+                    formControlName="bestAnswer"
+                    required></textarea>
             </div>
+            <div *ngIf="questionForm.controls.bestAnswer.touched && questionForm.controls.bestAnswer.errors || 
+                        questionForm.controls.bestAnswer.errors && clickedSubmit"
+                class="alert alert-danger">
+                Preferred answer is required.
+                </div>
         </div>
     </div>
 
@@ -79,6 +124,11 @@
             </acceptable-answers>
 
             <div class="answer-list">
+
+                <input 
+                    type="hidden" 
+                    formControlName="otherAnswers" 
+                    ngModel="{{ otherAcceptableAnswers | json }}"> 
                 <div 
                     class="row" 
                     *ngFor="let answer of otherAcceptableAnswers; let i = index;" 
@@ -92,8 +142,7 @@
                             <textarea 
                                value="{{answer}}"
                                id="answer{{i}}"
-                               class="form-control">
-                            </textarea>
+                               class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="col-sm-1">
