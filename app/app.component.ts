@@ -8,7 +8,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { QuestionListService } from './question-list/question-list.service';
+import { QuestionService } from './services/question.service';
 
 @Component({
     selector: 'interview-app',
@@ -36,7 +36,7 @@ import { QuestionListService } from './question-list/question-list.service';
         </div>
     `,
     directives: [ROUTER_DIRECTIVES],
-    providers: [QuestionListService]
+    providers: [QuestionService]
 })
 export class AppComponent { 
     title: string = "Interview App";

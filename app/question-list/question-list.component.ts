@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionListService } from './question-list.service';
+import { QuestionService } from './../services/question.service';
 
 @Component({
     moduleId: module.id,
@@ -9,10 +9,10 @@ import { QuestionListService } from './question-list.service';
 export class QuestionListComponent implements OnInit {
     questions: any[];
 
-    constructor(private _questionListService: QuestionListService) { }
+    constructor(private _questionService: QuestionService) { }
 
     ngOnInit() { 
-        this._questionListService.getQuestions()
+        this._questionService.getQuestions()
             .subscribe(
                 (questions) => this.questions = questions,
                 (err) => { console.log(err); }

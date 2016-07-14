@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 const URL_AllQuestions = 'http://localhost:1313/api/questions';
 
 @Injectable()
-export class QuestionListService {
+export class QuestionService {
 
     constructor(private _http: Http) { }
 
