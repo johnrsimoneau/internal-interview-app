@@ -3,10 +3,13 @@ import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { HTTP_PROVIDERS } from '@angular/http';
 import 'rxjs/Rx' // Get everythong from Rx
 
+import { appRouterProviders } from './app.routes';
+
 import { AppComponent } from './app.component';
 
 bootstrap(AppComponent, [
     HTTP_PROVIDERS,
     disableDeprecatedForms(),
-    provideForms()
+    provideForms(),
+    appRouterProviders
 ]);
