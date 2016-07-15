@@ -9,13 +9,11 @@ import {
     Validators
 } from '@angular/forms';
 
-import { AcceptableAnswersComponent } from './acceptable-answers/acceptable-answers.component';
+import { AnswersComponent } from './answers/answers.component';
 import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
 import { QuestionService } from './../services/question.service';
-
-// import { QuestionModel } from './question.model';
 
 @Component({
     moduleId: module.id,
@@ -24,7 +22,7 @@ import { QuestionService } from './../services/question.service';
     directives: [
         FORM_DIRECTIVES,
         REACTIVE_FORM_DIRECTIVES,
-        AcceptableAnswersComponent,
+        AnswersComponent,
         TagsComponent
     ],
     providers: [
@@ -34,44 +32,37 @@ import { QuestionService } from './../services/question.service';
 export class CreateQuestionComponent implements OnInit {
     dateCreated = new Date();
     questionForm: FormGroup;
-
     clickedSubmit = false;
 
     constructor(private fb: FormBuilder, private _questionService: QuestionService) { }
 
     ngOnInit() {
         this.questionForm = this.fb.group({
-            dateCreated: [],
+            createdAt: [],
             text: ['', Validators.required],
             tech: ['', Validators.required],
-            company: [],
             level: ['', Validators.required],
             tags: ['', Validators.required],
-            preferredAnswers: ['', Validators.required],
             answers: [],
         });
     }
 
-    public otherAcceptableAnswers: any[];
+    public answers: any[] = [];
     public selectedTags: any[];
 
-    enteredAnswers: string[];
+    enteredAnswers: string[] = [];
     enteredTags: any[] = [];
 
-    manageAcceptableAnswers(event: any) {
-        this.otherAcceptableAnswers = event.value;
-        this.enteredAnswers = this.otherAcceptableAnswers;
+    manageAnswersChange(event:any) {
+        this.answers = event.value;
+        this.enteredAnswers = this.answers;
+        console.log(this.answers);
     }
 
     manageSelectedTags(event: any) {
         this.selectedTags = event.value;
         this.enteredTags = this.selectedTags;
     }
-
-    removeAnswer(value: string) {
-        var index = this.otherAcceptableAnswers.indexOf(value);
-        this.otherAcceptableAnswers.splice(index, 1);
-    }   
 
     levels = [
         'Associate',

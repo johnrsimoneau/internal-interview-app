@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { 
+    Http, 
+    Response, 
+    Headers,
+    RequestOptions 
+} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 const URL_QUESTIONS = 'http://localhost:1313/api/questions';
@@ -16,13 +21,16 @@ export class QuestionService {
     }
 
     postQuestion(formContents:any) {
+        let body = JSON.stringify(formContents);
+        console.log(typeof formContents.answers);
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options =  new RequestOptions({headers: headers });
+        
         var data:any;
-        this._http.post(
-            URL_QUESTIONS,
-            JSON.stringify(formContents)
-        ).subscribe((response: Response) => {
-            data = response.json();
-            console.log(data);
+        this._http.post(URL_QUESTIONS, body, options)
+            .subscribe((response: Response) => {
+                data = response.json();
+                console.log(data);
         });
     }
 

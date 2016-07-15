@@ -9,13 +9,12 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="dateCreated">Date Created</label>
                 <input 
-                    type="text" 
+                    type="hidden" 
                     class="form-control"
-                    id="dateCreated"
-                    formControlName="dateCreated"
-                    ngModel="{{dateCreated | date:'MM/dd/yy'}}"
+                    id="createdAt"
+                    formControlName="createdAt"
+                    ngModel="{{ dateCreated }}"
                     disabled>
             </div>
         </div>
@@ -62,20 +61,6 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="company">Company</label>
-                <input 
-                    type="text"
-                    class="form-control"
-                    formControlName="company"
-                    id="company"
-                    placeholder="Company Name">
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="questionLevel">Level</label>
@@ -102,10 +87,9 @@
                 (selectedTagsChange)="manageSelectedTags($event)">
             </tags>
             <input 
-                type="text"
-                style="display: none" 
+                type="hidden"
                 class="form-control"
-                ngModel="{{enteredTags | json}}"
+                [ngModel]="enteredTags"
                 id="questionTags"
                 formControlName="tags">
                  <div *ngIf="enteredTags.length == 0 && clickedSubmit" 
@@ -118,63 +102,14 @@
 
     <div class="row">
         <div class="col-sm-9">
-            <h3>Preferred Answer</h3>
-            <div class="form-group">
-                <label for="bestAnswer">Preferred Answer</label>
-                <textarea 
-                    class="form-control" 
-                    placeholder="Enter a preferred answer for this question" 
-                    id="bestAnswer" 
-                    formControlName="preferredAnswers"
-                    required></textarea>
-            </div>
-            <div *ngIf="questionForm.controls.preferredAnswers.touched && questionForm.controls.preferredAnswers.errors || 
-                        questionForm.controls.preferredAnswers.errors && clickedSubmit"
-                class="alert alert-danger">
-                Preferred answer is required.
-                </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-9">
-            <acceptable-answers 
-                [shareAcceptableAnswers]="otherAcceptableAnswers"
-                (acceptableAnswersChange)="manageAcceptableAnswers($event);">
-            </acceptable-answers>
-
-            <div class="answer-list">
-
-                <input 
-                    type="hidden" 
-                    formControlName="answers" 
-                    ngModel="{{ otherAcceptableAnswers | json }}"> 
-                <div 
-                    class="row" 
-                    *ngFor="let answer of otherAcceptableAnswers; let i = index;" 
-                    [hidden]="otherAcceptableAnswers.length === 0">
-                    <div class="col-sm-11">
-                        <div class="form-group">
-                            <label 
-                                [attr.for]="'answer' + i">
-                                Acceptable Answer {{i + 1}}
-                            </label>
-                            <textarea 
-                               value="{{answer}}"
-                               id="answer{{i}}"
-                               class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-1">
-                        <a class="btn btn-sm" (click)="removeAnswer(answer)">
-                            <i class="glyphicon glyphicon-trash"></i>
-                        </a>
-                        <a class="btn btn-sm">
-                            <i class="glyphicon glyphicon-star-empty"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <answers
+                [allAnswersArray]="answers"
+                (allAnswersArrayChange)="manageAnswersArray($event)">
+            </answers>
+            <input 
+                type="hidden" 
+                formControlName="answers" 
+                ngModel="{{ answers }}">
         </div>
     </div>
 
