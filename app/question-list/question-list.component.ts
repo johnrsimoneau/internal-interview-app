@@ -11,6 +11,10 @@ export class QuestionListComponent implements OnInit {
 
     constructor(private _questionService: QuestionService) { }
 
+    editQuestion(value:any) {
+        console.log(value);
+    }
+
     ngOnInit() { 
         this._questionService.getQuestions()
             .subscribe(

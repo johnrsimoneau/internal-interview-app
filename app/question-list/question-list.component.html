@@ -14,33 +14,32 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Level</th>
                     <th>Question</th>
-                    <th>Tag</th>
-                    <th>Tags</th>
                     <th>Answer</th>
-                    <th>Company</th>
+                    <th>Tags</th>
+                    <th>Level</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let question of questions">
-                    <td>{{question.level}}</td>
+                <tr *ngFor="let question of questions" >
                     <td>{{question.text}}</td>
-                    <td>{{question.tag}}</td>
-                    <td>
-                        <ul>
-                            <li *ngFor="let tag of question.tags">{{tag}}</li>
-                        </ul>
-                    </td>
-                    <td>
-                        {{question.answer}}
-                    </td>
                     <td>
                         <ul>
                             <li *ngFor="let answer of question.answers">{{answer.text}}</li>
                         </ul>
                     </td>
-                    <td>{{question.company}}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let tag of question.tags">{{tag}}</li>
+                        </ul>
+                    </td>
+                    <td>{{question.level}}</td>
+                    <td>
+                        <button class="btn btn-default" (click)="editQuestion(question._id)">
+                            <i class="glyphicon glyphicon-pencil"></i> Edit
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
