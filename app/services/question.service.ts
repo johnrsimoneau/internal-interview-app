@@ -22,7 +22,6 @@ export class QuestionService {
 
     postQuestion(formContents:any) {
         let body = JSON.stringify(formContents);
-        console.log(typeof formContents.answers);
         let headers = new Headers({'Content-Type': 'application/json'});
         let options =  new RequestOptions({headers: headers });
         

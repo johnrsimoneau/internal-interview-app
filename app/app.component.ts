@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuestionService } from './services/question.service';
+import { EditQuestionService } from './services/edit-question.service';
 
 @Component({
     selector: 'interview-app',
@@ -36,7 +37,10 @@ import { QuestionService } from './services/question.service';
         </div>
     `,
     directives: [ROUTER_DIRECTIVES],
-    providers: [QuestionService]
+    providers: [
+        QuestionService,
+        EditQuestionService
+    ]
 })
 export class AppComponent { 
     title: string = "Interview App";
