@@ -36,7 +36,7 @@
                     </td>
                     <td>{{question.level}}</td>
                     <td>
-                        <button class="btn btn-default" (click)="editQuestion(question._id)">
+                        <button class="btn btn-default" [routerLink]="['/edit-question', question._id]">
                             <i class="glyphicon glyphicon-pencil"></i> Edit
                         </button>
                     </td>
