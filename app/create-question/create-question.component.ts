@@ -1,19 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+
 import {
     FORM_DIRECTIVES,
     REACTIVE_FORM_DIRECTIVES,
     FormBuilder,
     FormControl,
     FormGroup,
-    AbstractControl,
     Validators
 } from '@angular/forms';
 
-import { AnswersComponent } from './answers/answers.component';
-import { TagsComponent } from './tags/tags.component';
+import {
+    Router,
+    ROUTER_DIRECTIVES,
+    ActivatedRoute
+} from '@angular/router';
 
+// Models
+import { QuestionModel } from './../models/question.model';
+
+// Services
 import { TagService } from './tags/tag.service';
 import { QuestionService } from './../services/question.service';
+
+// Child Components
+import { AnswersComponent } from './answers/answers.component';
+import { TagsComponent } from './tags/tags.component';
 
 @Component({
     moduleId: module.id,
@@ -30,13 +41,23 @@ import { QuestionService } from './../services/question.service';
     ]
 })
 export class CreateQuestionComponent implements OnInit {
+    id: string;
+    title: string;
+    questionModel = new QuestionModel();
     dateCreated = new Date();
     questionForm: FormGroup;
     clickedSubmit = false;
 
-    constructor(private fb: FormBuilder, private _questionService: QuestionService) { }
+    constructor( private _route: ActivatedRoute,
+        private fb: FormBuilder, 
+        private _questionService: QuestionService) { 
+            _route.params
+                .subscribe( params => { this.id = params['id']; });
+    }
 
     ngOnInit() {
+
+        // Form Builder
         this.questionForm = this.fb.group({
             createdAt: [],
             text: ['', Validators.required],
@@ -45,6 +66,24 @@ export class CreateQuestionComponent implements OnInit {
             tags: ['', Validators.required],
             answers: [],
         });
+
+        let id = this._route.snapshot.params['id'];
+        this.title = id ? "Edit Question" : "Create Question";
+        
+        if (!id) {
+            return
+        }
+
+        this._questionService.getQuestionToEdit(id)
+            .subscribe(
+                // questionModel => this.questionModel = questionModel,
+                response => {
+                    if (response.status == 404) {
+                        // TODO: navigate to another page, set up the route.
+                        console.log("Question not found");
+                    }
+                }
+            )
     }
 
     public answers: any[] = [];
