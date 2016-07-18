@@ -49,7 +49,7 @@ export class AnswersComponent {
     }
 
     updateArrayText(index:number, value: string) {
-        this.allAnswersArray[index].answerValue = value;
+        this.allAnswersArray[index].text = value;
         this.manageAnswersChange.emit({
             value: this.allAnswersArray
         })
