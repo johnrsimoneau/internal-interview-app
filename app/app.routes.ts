@@ -9,7 +9,8 @@ const routes: RouterConfig = [
     { path: '', redirectTo: 'question-list', terminal: true },
     { path: 'question-list', component: QuestionListComponent },
     { path: 'create-question', component: CreateQuestionComponent },
-    { path: 'edit-question/:id', component: EditQuestionComponent },
+    { path: 'create-question/:id', component: CreateQuestionComponent },
+    // { path: 'edit-question/:id', component: EditQuestionComponent },
     { path: 'playground', component: PlaygroundComponent }
 ];
 

@@ -5,9 +5,14 @@ import {
     FormBuilder,
     FormControl,
     FormGroup,
-    AbstractControl,
     Validators
 } from '@angular/forms';
+
+import {
+    Router,
+    ROUTER_DIRECTIVES,
+    ActivatedRoute
+} from '@angular/router';
 
 import { AnswersComponent } from './answers/answers.component';
 import { TagsComponent } from './tags/tags.component';
@@ -30,21 +35,56 @@ import { QuestionService } from './../services/question.service';
     ]
 })
 export class CreateQuestionComponent implements OnInit {
+    id: string;
+    title: string;
     dateCreated = new Date();
     questionForm: FormGroup;
+    questionDetail: any;
     clickedSubmit = false;
 
-    constructor(private fb: FormBuilder, private _questionService: QuestionService) { }
+    constructor(private fb: FormBuilder, 
+        private _questionService: QuestionService,
+        private _route: ActivatedRoute) {
+            _route.params
+                .subscribe( params => { this.id = params['id']; });
+
+
+            
+        }
 
     ngOnInit() {
+
+        if (!this.id) {
+            return;
+        }
+
+        this.title = this.id ? "Edit Question" : "Create Question";
+
         this.questionForm = this.fb.group({
-            createdAt: [],
-            text: ['', Validators.required],
-            tech: ['', Validators.required],
-            level: ['', Validators.required],
-            tags: ['', Validators.required],
-            answers: [],
-        });
+            'createdAt': [],
+            'text': ['', Validators.required],
+            'tech': ['', Validators.required],
+            'level': ['', Validators.required],
+            'tags': ['', Validators.required],
+            'answers': [],
+        }); 
+        
+        this._questionService.getQuestionToEdit(this.id)
+            .subscribe(
+                (questionDetail) => this.questionDetail = questionDetail,
+                (err) => { console.log(err) ;}
+            )
+
+            this.questionForm.controls['text'].valueChanges
+            .subscribe((value) => {
+                value.text = this.questionDetail.text
+            })
+
+        // this.questionForm.controls['text'].valueChanges.subscribe(
+        //     (value: string) => this.questionForm.controls['text'] = this.questionDetail.text
+        // )
+    
+        // this.questionForm({'text': [this.questionDetail.text]});
     }
 
     public answers: any[] = [];

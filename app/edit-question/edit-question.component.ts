@@ -26,6 +26,7 @@ export class EditQuestionComponent implements OnInit {
 
     ngOnInit() {
         let id = this._route.snapshot.params['id'];
+
         this._editQuestionService.getQuestionToEdit(id)
             .subscribe(
                 (questionDetail) => this.questionDetail = questionDetail,

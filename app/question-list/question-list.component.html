@@ -18,11 +18,10 @@
                     <th>Answer</th>
                     <th>Tags</th>
                     <th>Level</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let question of questions" >
+                <tr *ngFor="let question of questions"  [routerLink]="['/create-question', question._id]">
                     <td>{{question.text}}</td>
                     <td>
                         <ul>
@@ -35,11 +34,6 @@
                         </ul>
                     </td>
                     <td>{{question.level}}</td>
-                    <td>
-                        <button class="btn btn-default" [routerLink]="['/edit-question', question._id]">
-                            <i class="glyphicon glyphicon-pencil"></i> Edit
-                        </button>
-                    </td>
                 </tr>
             </tbody>
         </table>

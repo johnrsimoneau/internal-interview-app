@@ -20,6 +20,14 @@ export class QuestionService {
             .catch(this._handleError);
     }
 
+    getQuestionToEdit(id:string) {
+        var editQuestionUrl = URL_QUESTIONS + '/' + id;
+        return this._http.get(editQuestionUrl)
+            .map((response: Response) => response.json())
+            .catch(this._handleError);
+    }
+
+
     postQuestion(formContents:any) {
         let body = JSON.stringify(formContents);
         let headers = new Headers({'Content-Type': 'application/json'});
