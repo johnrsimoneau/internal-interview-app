@@ -4,6 +4,7 @@ import {
     REACTIVE_FORM_DIRECTIVES,
     FormBuilder,
     FormControl,
+    AbstractControl,
     FormGroup,
     Validators
 } from '@angular/forms';
@@ -46,49 +47,11 @@ export class CreateQuestionComponent implements OnInit {
         private _questionService: QuestionService,
         private _route: ActivatedRoute) {
             _route.params
-                .subscribe( params => { this.id = params['id']; });
-
-
-            
-        }
-
-    ngOnInit() {
-
-        if (!this.id) {
-            return;
-        }
-
-        this.title = this.id ? "Edit Question" : "Create Question";
-
-        this.questionForm = this.fb.group({
-            'createdAt': [],
-            'text': ['', Validators.required],
-            'tech': ['', Validators.required],
-            'level': ['', Validators.required],
-            'tags': ['', Validators.required],
-            'answers': [],
-        }); 
-        
-        this._questionService.getQuestionToEdit(this.id)
-            .subscribe(
-                (questionDetail) => this.questionDetail = questionDetail,
-                (err) => { console.log(err) ;}
-            )
-
-            this.questionForm.controls['text'].valueChanges
-            .subscribe((value) => {
-                value.text = this.questionDetail.text
-            })
-
-        // this.questionForm.controls['text'].valueChanges.subscribe(
-        //     (value: string) => this.questionForm.controls['text'] = this.questionDetail.text
-        // )
-    
-        // this.questionForm({'text': [this.questionDetail.text]});
+                .subscribe( params => { this.id = params['id']; });  
     }
 
     public answers: any[] = [];
-    public selectedTags: any[];
+    public tags: any[];
 
     enteredAnswers: string[] = [];
     enteredTags: any[] = [];
@@ -96,12 +59,11 @@ export class CreateQuestionComponent implements OnInit {
     manageAnswersChange(event:any) {
         this.answers = event.value;
         this.enteredAnswers = this.answers;
-        console.log(this.answers);
     }
 
     manageSelectedTags(event: any) {
-        this.selectedTags = event.value;
-        this.enteredTags = this.selectedTags;
+        this.tags = event.value;
+        this.enteredTags = this.tags;
     }
 
     levels = [
@@ -113,13 +75,61 @@ export class CreateQuestionComponent implements OnInit {
 
     onSubmit(form: any) {
         if (this.questionForm.valid) {
-            console.log(form);
-            console.log('You submitted ', form);
             this._questionService.postQuestion(form);
         } else {
-            console.log('errors');
             this.clickedSubmit = true;
             return;
         }
+    }
+
+    ngOnInit() {
+
+        this.title = this.id ? "Edit Question" : "Create Question";
+
+        this.questionForm = this.fb.group({
+            createdAt: [],
+            text: [Validators.required],
+            tech: ['', Validators.required],
+            level: ['', Validators.required],
+            tags: ['', Validators.required],
+            answers: []
+        }); 
+
+        if (!this.id) {
+            return;
+        }        
+        this._questionService.getQuestionToEdit(this.id)
+            .subscribe(
+                (questionFromApi) => { this.questionDetail = questionFromApi;
+                    // Text
+                    (<FormControl>this.questionForm.controls['text']).updateValue(this.questionDetail[0].text);
+                    (<FormControl>this.questionForm.controls['text']).updateValueAndValidity();
+
+                    // Tech
+                    (<FormControl>this.questionForm.controls['tech']).updateValue(this.questionDetail[0].tech);
+                    (<FormControl>this.questionForm.controls['tech']).updateValueAndValidity();     
+
+                    // Level
+                    (<FormControl>this.questionForm.controls['level']).updateValue(this.questionDetail[0].level);
+                    (<FormControl>this.questionForm.controls['level']).updateValueAndValidity();
+
+                    // Tags
+                    (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
+                    (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
+                    this.tags = this.questionDetail[0].tags;
+
+                    // Answers
+                    (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
+                    (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();
+                    this.answers = this.questionDetail[0].answers;
+                    console.log(this.answers);
+                },
+                (err:any) => console.log(err));
+                
+
+        // this.questionForm.controls['text'].valueChanges.subscribe(
+        //     (value: string) => this.questionForm.controls['text'] = this.questionDetail.text
+        // )
+        // this.questionForm({'text': [this.questionDetail.text]});
     }
 }

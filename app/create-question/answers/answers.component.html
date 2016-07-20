@@ -27,7 +27,8 @@
                             <input 
                                 (change)="updatePreferred(i)"
                                 type="radio" 
-                                name="isPreferred" 
+                                name="isPreferred"
+                                [checked]="answer.preferred"
                                 [attr.id]="'preferredAnswer'+i"> Preferred Answer
                         </label>
                     <textarea #textarea (blur)="updateArrayText(i, textarea.value)" value="{{answer.text}}" class="form-control"></textarea>

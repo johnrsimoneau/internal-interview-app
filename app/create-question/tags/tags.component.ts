@@ -17,9 +17,8 @@ import { TagService } from './tag.service';
 export class TagsComponent {
     availableTags: Array<any>;
     noResults: boolean = false;
-    chosenTags: any[] = [];
 
-    @Input() sharedTagsArray:any[] = [];
+    @Input() allTagsArray:any[] = [];
     @Output() selectedTagsChange = new EventEmitter();
 
     constructor( private _tagService: TagService ) { }
@@ -48,19 +47,17 @@ export class TagsComponent {
         }
     }
     addTag(tag:string) {
-        this.chosenTags.push(tag);
-        this.sharedTagsArray = this.chosenTags;
+        this.allTagsArray.push(tag);
         this.selectedTagsChange.emit({
-            value: this.sharedTagsArray
+            value: this.allTagsArray
         });
     }
 
     removeTag(value: string) {
-        var index = this.chosenTags.indexOf(value);
-        this.chosenTags.splice(index, 1);
-        this.sharedTagsArray = this.chosenTags;
+        var indexOfTag = this.allTagsArray.indexOf(value);
+        this.allTagsArray.splice(indexOfTag, 1);
         this.selectedTagsChange.emit({
-            value: this.sharedTagsArray
+            value: this.allTagsArray
         });
     }
 

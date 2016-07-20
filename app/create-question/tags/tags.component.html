@@ -18,10 +18,10 @@
         </ul>
     </div>
 
-    <div class="col-sm-9" [hidden]="!chosenTags.length">
+    <div class="col-sm-9" *ngIf="allTagsArray">
         <label>Selected Tags</label>
         <div class="tag-list">
-            <span class="tag" *ngFor="let selectedTag of chosenTags; let i = index;">
+            <span class="tag" *ngFor="let selectedTag of allTagsArray; let i = index;">
                 {{selectedTag}} 
                 <a class="btn btn-sm" (click)="removeTag(selectedTag)">
                     <i class="glyphicon glyphicon-remove-circle"></i>

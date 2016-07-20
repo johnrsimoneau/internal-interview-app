@@ -4,8 +4,6 @@
     </div>
 </div>
 
-{{questionDetail |json}}
-
 <form [formGroup]="questionForm" (ngSubmit)="onSubmit(questionForm.value)" novalidate>
 
     <div class="row">
@@ -34,8 +32,9 @@
                     formControlName="text"
                     required></textarea>
             </div>
-            <div *ngIf="questionForm.controls.text.touched && questionForm.controls.text.errors || 
-                        questionForm.controls.text.errors && clickedSubmit"
+            
+            <div *ngIf="questionForm.controls['text'].touched && questionForm.controls['text'].errors || 
+                        questionForm.controls['text'].errors && clickedSubmit"
                 class="alert alert-danger">
                 Question is required.
             </div>
@@ -85,7 +84,7 @@
     <div class="row">
         <div class="col-sm-12">
             <tags 
-                [sharedTagsArray]="selectedTags"
+                [allTagsArray]="tags"
                 (selectedTagsChange)="manageSelectedTags($event)">
             </tags>
             <input 

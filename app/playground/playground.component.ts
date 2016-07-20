@@ -14,6 +14,7 @@ import { ParentComponent } from './parent/parent.component';
     ]
 })
 export class PlaygroundComponent implements OnInit {
+    isPreferred:boolean = true;
     constructor() { }
 
     ngOnInit() { }
