@@ -20,7 +20,6 @@
         </div>
     </div>
 
-
     <div class="row">
         <div class="col-sm-8">
             <div class="form-group">
@@ -90,7 +89,7 @@
             <input 
                 type="hidden"
                 class="form-control"
-                [ngModel]="enteredTags"
+                [ngModel]="tags"
                 id="questionTags"
                 formControlName="tags">
                  <div *ngIf="enteredTags.length == 0 && clickedSubmit" 

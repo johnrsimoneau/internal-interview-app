@@ -27,7 +27,6 @@ export class QuestionService {
             .catch(this._handleError);
     }
 
-
     postQuestion(formContents:any) {
         let body = JSON.stringify(formContents);
         let headers = new Headers({'Content-Type': 'application/json'});

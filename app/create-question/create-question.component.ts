@@ -88,7 +88,7 @@ export class CreateQuestionComponent implements OnInit {
 
         this.questionForm = this.fb.group({
             createdAt: [],
-            text: [Validators.required],
+            text: ['', Validators.required],
             tech: ['', Validators.required],
             level: ['', Validators.required],
             tags: ['', Validators.required],
@@ -97,35 +97,35 @@ export class CreateQuestionComponent implements OnInit {
 
         if (!this.id) {
             return;
-        }        
-        this._questionService.getQuestionToEdit(this.id)
-            .subscribe(
-                (questionFromApi) => { this.questionDetail = questionFromApi;
-                    // Text
-                    (<FormControl>this.questionForm.controls['text']).updateValue(this.questionDetail[0].text);
-                    (<FormControl>this.questionForm.controls['text']).updateValueAndValidity();
+        } else {       
+            this._questionService.getQuestionToEdit(this.id)
+                .subscribe(
+                    (questionFromApi) => { this.questionDetail = questionFromApi;
+                        // Text
+                        (<FormControl>this.questionForm.controls['text']).updateValue(this.questionDetail[0].text);
+                        (<FormControl>this.questionForm.controls['text']).updateValueAndValidity();
 
-                    // Tech
-                    (<FormControl>this.questionForm.controls['tech']).updateValue(this.questionDetail[0].tech);
-                    (<FormControl>this.questionForm.controls['tech']).updateValueAndValidity();     
+                        // Tech
+                        (<FormControl>this.questionForm.controls['tech']).updateValue(this.questionDetail[0].tech);
+                        (<FormControl>this.questionForm.controls['tech']).updateValueAndValidity();     
 
-                    // Level
-                    (<FormControl>this.questionForm.controls['level']).updateValue(this.questionDetail[0].level);
-                    (<FormControl>this.questionForm.controls['level']).updateValueAndValidity();
+                        // Level
+                        (<FormControl>this.questionForm.controls['level']).updateValue(this.questionDetail[0].level);
+                        (<FormControl>this.questionForm.controls['level']).updateValueAndValidity();
 
-                    // Tags
-                    (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
-                    (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
-                    this.tags = this.questionDetail[0].tags;
+                        // Tags
+                        (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
+                        (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
+                        this.tags = this.questionDetail[0].tags;
 
-                    // Answers
-                    (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
-                    (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();
-                    this.answers = this.questionDetail[0].answers;
-                    console.log(this.answers);
-                },
-                (err:any) => console.log(err));
-                
+                        // Answers
+                        (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
+                        (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();
+                        this.answers = this.questionDetail[0].answers;
+                        console.log(this.answers);
+                    },
+                    (err:any) => console.log(err));
+        }
 
         // this.questionForm.controls['text'].valueChanges.subscribe(
         //     (value: string) => this.questionForm.controls['text'] = this.questionDetail.text

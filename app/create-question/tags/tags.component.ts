@@ -15,11 +15,11 @@ import { TagService } from './tag.service';
     templateUrl: 'tags.component.html'
 })
 export class TagsComponent {
-    availableTags: Array<any>;
-    noResults: boolean = false;
-
-    @Input() allTagsArray:any[] = [];
+    @Input() allTagsArray:any = [''];
     @Output() selectedTagsChange = new EventEmitter();
+
+    availableTags: Array<any>
+    noResults: boolean = false;
 
     constructor( private _tagService: TagService ) { }
 
@@ -46,7 +46,12 @@ export class TagsComponent {
             
         }
     }
+
+
     addTag(tag:string) {
+        if (this.allTagsArray == undefined) {
+            this.allTagsArray = [];
+        }
         this.allTagsArray.push(tag);
         this.selectedTagsChange.emit({
             value: this.allTagsArray
