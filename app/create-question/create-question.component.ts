@@ -38,6 +38,7 @@ import { QuestionService } from './../services/question.service';
 export class CreateQuestionComponent implements OnInit {
     id: string;
     title: string;
+    buttonTitle: string;
     dateCreated = new Date();
     questionForm: FormGroup;
     questionDetail: any;
@@ -85,6 +86,7 @@ export class CreateQuestionComponent implements OnInit {
     ngOnInit() {
 
         this.title = this.id ? "Edit Question" : "Create Question";
+        this.buttonTitle = this.id ? "Save Changes" : "Submit Question";
 
         this.questionForm = this.fb.group({
             createdAt: [],
