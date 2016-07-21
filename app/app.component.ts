@@ -2,8 +2,6 @@ import { provide, Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, provideRouter, RouterConfig } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
-
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { QuestionService } from './manage-questions/services/question.service';
 
 @Component({
