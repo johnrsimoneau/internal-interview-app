@@ -6,7 +6,7 @@ import { AnswersComponent } from './answers/answers.component';
 import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
-import { QuestionService } from './services/question.service';
+import { QuestionService } from './../services/question.service';
 
 @Component({
     moduleId: module.id,

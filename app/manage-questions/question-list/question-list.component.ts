@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
-import { QuestionService } from './../manage-questions/services/question.service';
+import { QuestionService } from './../services/question.service';
 
 @Component({
     moduleId: module.id,
