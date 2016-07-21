@@ -19,7 +19,6 @@ export class QuestionListComponent implements OnInit {
 
     manageQuestionSearchEvent(event: any) {
         this.isSearching = event.value;
-        console.log(this.isSearching);
     }
 
     removeQuestion(id:string) {
