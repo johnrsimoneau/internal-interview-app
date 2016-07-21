@@ -15,6 +15,10 @@ export class QuestionListComponent implements OnInit {
 
     constructor(private _questionService: QuestionService) { }
 
+    removeQuestion(id:string) {
+        this._questionService.deleteQuestion(id);
+    }
+
     ngOnInit() { 
         this._questionService.getQuestions()
             .subscribe(

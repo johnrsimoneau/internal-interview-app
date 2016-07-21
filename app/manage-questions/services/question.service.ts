@@ -44,6 +44,16 @@ export class QuestionService {
         });
     }
 
+    deleteQuestion(id:string) {
+        var deleteQuestionUrl = URL_QUESTIONS + '/' + id;
+        var data: any;
+        this._http.delete(deleteQuestionUrl)
+            .subscribe((response: Response) => {
+                data = response.json();
+                console.log(data);
+            })
+    }
+
     _handleError(err:any) {
         console.log(err);
         // TODO: customize this error!
