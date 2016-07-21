@@ -1,30 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    FORM_DIRECTIVES,
-    REACTIVE_FORM_DIRECTIVES,
-    FormBuilder,
-    FormControl,
-    AbstractControl,
-    FormGroup,
-    Validators
-} from '@angular/forms';
-
-import {
-    Router,
-    ROUTER_DIRECTIVES,
-    ActivatedRoute
-} from '@angular/router';
+import { FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormControl, AbstractControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
 import { AnswersComponent } from './answers/answers.component';
 import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
-import { QuestionService } from './../services/question.service';
+import { QuestionService } from './services/question.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'create-question',
-    templateUrl: 'create-question.component.html',
+    selector: 'question',
+    templateUrl: 'question.component.html',
     directives: [
         FORM_DIRECTIVES,
         REACTIVE_FORM_DIRECTIVES,
@@ -35,10 +22,11 @@ import { QuestionService } from './../services/question.service';
         TagService
     ]
 })
-export class CreateQuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit {
     id: string;
     title: string;
     buttonTitle: string;
+    levels = [ 'Associate', 'Staff', 'Senior', 'Principal' ];
     dateCreated = new Date();
     questionForm: FormGroup;
     questionDetail: any;
@@ -67,13 +55,6 @@ export class CreateQuestionComponent implements OnInit {
         this.enteredTags = this.tags;
     }
 
-    levels = [
-        'Associate',
-        'Staff',
-        'Senior',
-        'Principal'
-    ];
-
     onSubmit(form: any) {
         if( !this.id ) {
             if (this.questionForm.valid) {
@@ -84,12 +65,7 @@ export class CreateQuestionComponent implements OnInit {
             }
         } else {
              if (this.questionForm.valid) {
-                var questions = {}
-                questions = form;
-
-                console.log('', form);
-                this._questionService.putQuestion(this.id, questions);
-                // this._questionService.putQuestion(this.id, form);
+                this._questionService.putQuestion(this.id, form);
             } else {
                 this.clickedSubmit = true;
                 return;
@@ -139,7 +115,6 @@ export class CreateQuestionComponent implements OnInit {
                     (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
                     (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();
                     this.answers = this.questionDetail[0].answers;
-                    console.log(this.answers);
                 },
                 (err:any) => console.log(err));
     }

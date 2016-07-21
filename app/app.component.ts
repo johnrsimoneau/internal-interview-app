@@ -1,15 +1,10 @@
 import { provide, Component } from '@angular/core';
-import {
-    ROUTER_DIRECTIVES,
-    provideRouter,
-    RouterConfig
-} from '@angular/router';
+import { ROUTER_DIRECTIVES, provideRouter, RouterConfig } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { QuestionService } from './services/question.service';
-import { EditQuestionService } from './services/edit-question.service';
+import { QuestionService } from './manage-questions/services/question.service';
 
 @Component({
     selector: 'interview-app',
@@ -18,7 +13,7 @@ import { EditQuestionService } from './services/edit-question.service';
             <div class="container">
                 <ul class="nav navbar-nav">
                     <li><a [routerLink]="['question-list']">Questions</a></li>
-                    <li><a [routerLink]="['create-question']">Create Question</a></li>
+                    <li><a [routerLink]="['question']">Create Question</a></li>
                     <li><a [routerLink]="['playground']">Playground</a></li>
                 </ul>
             </div>
@@ -38,8 +33,7 @@ import { EditQuestionService } from './services/edit-question.service';
     `,
     directives: [ROUTER_DIRECTIVES],
     providers: [
-        QuestionService,
-        EditQuestionService
+        QuestionService
     ]
 })
 export class AppComponent { 

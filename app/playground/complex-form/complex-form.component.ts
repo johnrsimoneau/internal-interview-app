@@ -54,7 +54,6 @@ export class ComplexFormComponent implements OnInit {
 
     onSubmit(form: any) {
         if (this.complexForm.valid) {
-            console.log('You submitted ', form);
         } else {
             this.clickedSubmit = true;
             return;

@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let question of questions"  [routerLink]="['/create-question', question._id]">
+                <tr *ngFor="let question of questions"  [routerLink]="['/question', question._id]">
                     <td>{{question.text}}</td>
                     <td>
                         <ul>
