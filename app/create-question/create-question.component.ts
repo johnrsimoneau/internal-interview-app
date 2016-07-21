@@ -75,11 +75,25 @@ export class CreateQuestionComponent implements OnInit {
     ];
 
     onSubmit(form: any) {
-        if (this.questionForm.valid) {
-            this._questionService.postQuestion(form);
+        if( !this.id ) {
+            if (this.questionForm.valid) {
+                this._questionService.postQuestion(form);
+            } else {
+                this.clickedSubmit = true;
+                return;
+            }
         } else {
-            this.clickedSubmit = true;
-            return;
+             if (this.questionForm.valid) {
+                var questions = {}
+                questions = form;
+
+                console.log('', form);
+                this._questionService.putQuestion(this.id, questions);
+                // this._questionService.putQuestion(this.id, form);
+            } else {
+                this.clickedSubmit = true;
+                return;
+            }
         }
     }
 
@@ -99,39 +113,34 @@ export class CreateQuestionComponent implements OnInit {
 
         if (!this.id) {
             return;
-        } else {       
-            this._questionService.getQuestionToEdit(this.id)
-                .subscribe(
-                    (questionFromApi) => { this.questionDetail = questionFromApi;
-                        // Text
-                        (<FormControl>this.questionForm.controls['text']).updateValue(this.questionDetail[0].text);
-                        (<FormControl>this.questionForm.controls['text']).updateValueAndValidity();
-
-                        // Tech
-                        (<FormControl>this.questionForm.controls['tech']).updateValue(this.questionDetail[0].tech);
-                        (<FormControl>this.questionForm.controls['tech']).updateValueAndValidity();     
-
-                        // Level
-                        (<FormControl>this.questionForm.controls['level']).updateValue(this.questionDetail[0].level);
-                        (<FormControl>this.questionForm.controls['level']).updateValueAndValidity();
-
-                        // Tags
-                        (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
-                        (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
-                        this.tags = this.questionDetail[0].tags;
-
-                        // Answers
-                        (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
-                        (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();
-                        this.answers = this.questionDetail[0].answers;
-                        console.log(this.answers);
-                    },
-                    (err:any) => console.log(err));
         }
 
-        // this.questionForm.controls['text'].valueChanges.subscribe(
-        //     (value: string) => this.questionForm.controls['text'] = this.questionDetail.text
-        // )
-        // this.questionForm({'text': [this.questionDetail.text]});
+        this._questionService.getQuestionToEdit(this.id)
+            .subscribe(
+                (questionFromApi) => { this.questionDetail = questionFromApi;
+                    // Text
+                    (<FormControl>this.questionForm.controls['text']).updateValue(this.questionDetail[0].text);
+                    (<FormControl>this.questionForm.controls['text']).updateValueAndValidity();
+
+                    // Tech
+                    (<FormControl>this.questionForm.controls['tech']).updateValue(this.questionDetail[0].tech);
+                    (<FormControl>this.questionForm.controls['tech']).updateValueAndValidity();     
+
+                    // Level
+                    (<FormControl>this.questionForm.controls['level']).updateValue(this.questionDetail[0].level);
+                    (<FormControl>this.questionForm.controls['level']).updateValueAndValidity();
+
+                    // Tags
+                    (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
+                    (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
+                    this.tags = this.questionDetail[0].tags;
+
+                    // Answers
+                    (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
+                    (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();
+                    this.answers = this.questionDetail[0].answers;
+                    console.log(this.answers);
+                },
+                (err:any) => console.log(err));
     }
 }
