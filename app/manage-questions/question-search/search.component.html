@@ -1,0 +1,56 @@
+<form>
+    <label for="questionSearch">Search all questions</label>
+    <div class="input-group">
+        <input
+            #searchInput
+            type="text" 
+            id="questionSearch" 
+            class="form-control" 
+            placeholder="Search available questions"
+            (keyup)="searchQuestions(searchInput.value)">
+        <span class="input-group-btn">
+            <input 
+                type="reset" 
+                class="btn btn-default" 
+                value="Clear"
+                (click)="clearQuestionSearchResults()">
+        </span>    
+    </div>
+    
+</form>
+<div *ngIf="availableQuestions != undefined && availableQuestions.length">
+    <h2>Search Results</h2>
+    <table class="table">
+        <thead class="table">
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Tags</th>
+                <th>Level</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let question of availableQuestions"  [routerLink]="['/question', question._id]">
+                <td>{{question.text}}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let answer of question.answers">{{answer.text}}</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li *ngFor="let tag of question.tags">{{tag}}</li>
+                    </ul>
+                </td>
+                <td>{{question.level}}</td>
+                <td width="13%">
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm pull-left">Add</button>
+                        <button class="btn btn-default btn-sm pull-right" (click)="removeQuestion(question._id)">Remove</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

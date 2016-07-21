@@ -1,48 +1,49 @@
 <div class="row">
     <div class="col-sm-12">
-        <h2>Available Questions</h2>
-    </div>
-
-    <div class="col-sm-4 col-sm-offset-8">
         <div class="form-group">
-            <input type="text" id="questionSearch" class="form-control" placeholder="Search available questions">
-            <p class="help-text"><small>Hit 'Enter' to refine questions.</small></p>
+            <search-questions 
+            (searchingEventChange)="manageQuestionSearchEvent($event)">
+            </search-questions>
         </div>
     </div>
-
-    <div class="col-sm-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Question</th>
-                    <th>Answer</th>
-                    <th>Tags</th>
-                    <th>Level</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let question of questions"  [routerLink]="['/question', question._id]">
-                    <td>{{question.text}}</td>
-                    <td>
-                        <ul>
-                            <li *ngFor="let answer of question.answers">{{answer.text}}</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <ul>
-                            <li *ngFor="let tag of question.tags">{{tag}}</li>
-                        </ul>
-                    </td>
-                    <td>{{question.level}}</td>
-                    <td width="13%">
-                        <div class="btn-group">
-                            <button class="btn btn-primary btn-sm pull-left">Add</button>
-                            <button class="btn btn-default btn-sm pull-right" (click)="removeQuestion(question._id)">Remove</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div *ngIf="!isSearching">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <h2>All Available Questions</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Tags</th>
+                        <th>Level</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let question of questions"  [routerLink]="['/question', question._id]">
+                        <td>{{question.text}}</td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let answer of question.answers">{{answer.text}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let tag of question.tags">{{tag}}</li>
+                            </ul>
+                        </td>
+                        <td>{{question.level}}</td>
+                        <td width="13%">
+                            <div class="btn-group">
+                                <button class="btn btn-primary btn-sm pull-left">Add</button>
+                                <button class="btn btn-default btn-sm pull-right" (click)="removeQuestion(question._id)">Remove</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

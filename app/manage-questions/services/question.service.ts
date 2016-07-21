@@ -8,9 +8,28 @@ export class QuestionService {
 
     constructor(private _http: Http) { }
 
+    private _extractData(res:Response) {
+        let body = res.json();
+        return body || {};
+    }
+
     getQuestions() {
         return this._http.get(URL_QUESTIONS)
             .map((response: Response) => response.json())
+            .catch(this._handleError);
+    }
+
+    getQuestionsBySearchTerm(term: string) {
+        let apiUrl = 'http://localhost:1313/api/';
+        let params: string = [
+          'questions',
+          'search',
+          `${term}`  
+        ].join('/');
+        let queryUrl: string = apiUrl + params;
+        
+        return this._http.get(queryUrl)
+            .map(this._extractData)
             .catch(this._handleError);
     }
 
