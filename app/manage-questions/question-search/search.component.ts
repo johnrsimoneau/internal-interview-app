@@ -19,20 +19,27 @@ export class SearchQuestionsComponent implements OnInit {
     constructor(private _questionService: QuestionService) { }
 
     clearQuestionSearchResults() {
-        this.availableQuestions = [];
+        this.availableQuestions = undefined;
         this.searchingEventChange.emit({
             value: false
         })
     }
 
     searchQuestions(term: string) {
-        this.searchingEventChange.emit({
-            value: true
-        })
         this.noResults = false;
+        if(term.length == 0) {
+            this.searchingEventChange.emit({
+                value: false
+            });
+        } else {
+            this.searchingEventChange.emit({
+                value: true
+            });
+        }
         if (!term.length) {
             this.availableQuestions = Array<string>();
         } else {
+            
             this._questionService
                 .getQuestionsBySearchTerm(term)
                 .filter(text => term.length >= 2)
@@ -42,7 +49,9 @@ export class SearchQuestionsComponent implements OnInit {
                     availableQuestions => {
                         if (availableQuestions.length) {
                             this.availableQuestions = availableQuestions;
+                            this.noResults = false;
                         } else {
+                            this.availableQuestions = undefined;
                             this.noResults = true;
                         }
                     }
