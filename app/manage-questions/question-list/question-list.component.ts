@@ -13,7 +13,7 @@ import { QuestionService } from './../services/question.service';
 })
 export class QuestionListComponent implements OnInit {
     questions: any[];
-    showConfirmation: boolean = false;
+    // showConfirmation: boolean = false;
     public isSearching = false;
 
     constructor(private _questionService: QuestionService) { }

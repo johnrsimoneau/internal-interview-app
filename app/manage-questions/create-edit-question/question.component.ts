@@ -81,7 +81,6 @@ export class QuestionComponent implements OnInit {
         this._confirmationModel.closeBtnTitle = "No, Don't Delete Question";
         this._confirmationModel.showOkayBtn = false;
         this._confirmationService.displayConfirmation(this._confirmationModel);
-        console.log(this._confirmationModel);
     }
 
     onSubmit(form: any) {
