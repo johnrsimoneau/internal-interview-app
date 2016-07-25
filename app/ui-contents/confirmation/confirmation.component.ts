@@ -4,6 +4,7 @@ import { ConfirmationService, ConfirmationModel } from './confirmation.service';
 @Component({
     moduleId: module.id,
     selector: 'confirmation',
+    styleUrls: ['./confirmation.style.css'],
     templateUrl: 'confirmation.component.html'
 })
 export class ConfirmationComponent implements AfterViewInit {

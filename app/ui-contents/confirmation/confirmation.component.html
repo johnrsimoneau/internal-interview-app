@@ -1,7 +1,23 @@
-<div class="confirmation">
-    <h2>{{confirmationTitle}}</h2>
-    <p>{{confirmationMessage}}</p>
-    <button (click)="close()" *ngIf="closeBtnTitle">{{closeBtnTitle}}</button>
-    <button (click)="performAction()" *ngIf="actionBtnTitle">{{actionBtnTitle}}</button>
-    <button (click)="performAction()" *ngIf="showOkayBtn">Okay</button>
+<div class="confirmation-container">
+    <div class="confirmation">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{{confirmationTitle}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p>{{confirmationMessage}}</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn btn-default" (click)="close()" *ngIf="closeBtnTitle">{{closeBtnTitle}}</button>
+            <button class="btn btn-default" (click)="performAction()" *ngIf="actionBtnTitle">{{actionBtnTitle}}</button>
+            <button class="btn btn-primary" (click)="performAction()" *ngIf="showOkayBtn">Okay</button>
+        </div>
+    </div>
+
+    </div>
 </div>

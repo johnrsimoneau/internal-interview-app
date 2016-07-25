@@ -2,7 +2,9 @@ import { provide, Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, provideRouter, RouterConfig } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
+
 import { QuestionService } from './manage-questions/services/question.service';
+import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmation/confirmation.service';
 
 @Component({
     selector: 'interview-app',
@@ -31,7 +33,9 @@ import { QuestionService } from './manage-questions/services/question.service';
     `,
     directives: [ROUTER_DIRECTIVES],
     providers: [
-        QuestionService
+        QuestionService,
+        ConfirmationService,
+        ConfirmationModel
     ]
 })
 export class AppComponent { 

@@ -2,29 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormControl, AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
+import { ConfirmationComponent } from './../../ui-contents/confirmation/confirmation.component';
 import { AnswersComponent } from './answers/answers.component';
 import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
 import { QuestionService } from './../services/question.service';
+import { ConfirmationService, ConfirmationModel } from './../../ui-contents/confirmation/confirmation.service';
 
 @Component({
     moduleId: module.id,
     selector: 'question',
     templateUrl: 'question.component.html',
     directives: [
+        ROUTER_DIRECTIVES,
         FORM_DIRECTIVES,
         REACTIVE_FORM_DIRECTIVES,
         AnswersComponent,
+        ConfirmationComponent,
         TagsComponent
     ],
     providers: [
-        TagService
+        TagService,
     ]
 })
 export class QuestionComponent implements OnInit {
     id: string;
-    title: string;
+    public showConfirmation: boolean;
+    canDelete: boolean;
+    pageTitle: string;
     buttonTitle: string;
     levels = [ 'Associate', 'Staff', 'Senior', 'Principal' ];
     dateCreated = new Date();
@@ -34,8 +40,11 @@ export class QuestionComponent implements OnInit {
 
     constructor(private fb: FormBuilder, 
         private _questionService: QuestionService,
-        private _route: ActivatedRoute) {
-            _route.params
+        private _confirmationService: ConfirmationService,
+        private _confirmationModel: ConfirmationModel,
+        private _router: Router,
+        private _activatedRoute: ActivatedRoute) {
+            _activatedRoute.params
                 .subscribe( params => { this.id = params['id']; });  
     }
 
@@ -53,6 +62,26 @@ export class QuestionComponent implements OnInit {
     manageSelectedTags(event: any) {
         this.tags = event.value;
         this.enteredTags = this.tags;
+    }
+
+    canDeleteContent(event: any) {
+        this.canDelete = event.value;
+        this.showConfirmation = false;
+        if ( this.canDelete ) {
+            this._questionService.deleteQuestion(this.id);
+            this._router.navigate(['./question-list']);
+        }
+    }
+
+    deleteItem() {
+        this.showConfirmation = true;
+        this._confirmationModel.title = "Are you sure you want to delete this question?";
+        this._confirmationModel.message = "WARNING! Once deleted, this question cannot be retrived. Are you sure you want to continue?";
+        this._confirmationModel.actionBtnTitle = "Yes, Delete Question";
+        this._confirmationModel.closeBtnTitle = "No, Don't Delete Question";
+        this._confirmationModel.showOkayBtn = false;
+        this._confirmationService.displayConfirmation(this._confirmationModel);
+        console.log(this._confirmationModel);
     }
 
     onSubmit(form: any) {
@@ -75,7 +104,7 @@ export class QuestionComponent implements OnInit {
 
     ngOnInit() {
 
-        this.title = this.id ? "Edit Question" : "Create Question";
+        this.pageTitle = this.id ? "Edit Question" : "Create Question";
         this.buttonTitle = this.id ? "Save Changes" : "Submit Question";
 
         this.questionForm = this.fb.group({
