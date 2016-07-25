@@ -88,6 +88,7 @@ export class QuestionComponent implements OnInit {
         if( !this.id ) {
             if (this.questionForm.valid) {
                 this._questionService.postQuestion(form);
+                this._router.navigate(['./question-list']);
             } else {
                 this.clickedSubmit = true;
                 return;
@@ -95,6 +96,7 @@ export class QuestionComponent implements OnInit {
         } else {
              if (this.questionForm.valid) {
                 this._questionService.putQuestion(this.id, form);
+                this._router.navigate(['./question-list']);
             } else {
                 this.clickedSubmit = true;
                 return;
