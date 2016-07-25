@@ -1,0 +1,7 @@
+<div class="confirmation">
+    <h2>{{confirmationTitle}}</h2>
+    <p>{{confirmationMessage}}</p>
+    <button (click)="close()" *ngIf="closeBtnTitle">{{closeBtnTitle}}</button>
+    <button (click)="performAction()" *ngIf="actionBtnTitle">{{actionBtnTitle}}</button>
+    <button (click)="performAction()" *ngIf="showOkayBtn">Okay</button>
+</div>

@@ -6,6 +6,12 @@
             </search-questions>
         </div>
     </div>
+
+    <confirmation 
+        *ngIf="showConfirmation" 
+        (manageUserInteration)="canDeleteContent($event);">
+    </confirmation>
+
     <div *ngIf="!isSearching">
         <div class="col-sm-12">
 
