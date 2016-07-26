@@ -30,7 +30,6 @@
                 <thead class="table">
                     <tr>
                         <th>Question</th>
-                        <th>Answer</th>
                         <th>Tags</th>
                         <th>Level</th>
                         <th>Actions</th>
@@ -39,11 +38,6 @@
                 <tbody>
                     <tr *ngFor="let question of availableQuestions">
                         <td>{{question.text}}</td>
-                        <td>
-                            <ul>
-                                <li *ngFor="let answer of question.answers">{{answer.text}}</li>
-                            </ul>
-                        </td>
                         <td>
                             <ul>
                                 <li *ngFor="let tag of question.tags">{{tag}}</li>
