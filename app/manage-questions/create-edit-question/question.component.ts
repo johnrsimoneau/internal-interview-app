@@ -7,7 +7,7 @@ import { AnswersComponent } from './answers/answers.component';
 import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
-import { QuestionService } from './../services/question.service';
+import { QuestionService } from './../../services/question.service';
 import { ConfirmationService, ConfirmationModel } from './../../ui-contents/confirmation/confirmation.service';
 
 @Component({

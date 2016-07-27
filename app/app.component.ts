@@ -3,7 +3,7 @@ import { ROUTER_DIRECTIVES, provideRouter, RouterConfig } from '@angular/router'
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
-import { QuestionService } from './manage-questions/services/question.service';
+import { QuestionService } from './services/question.service';
 import { SearchService } from './search/search.service';
 import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmation/confirmation.service';
 
@@ -14,7 +14,6 @@ import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmati
             <div class="container">
                 <ul class="nav navbar-nav">
                     <li><a [routerLink]="['question-list']">Questions</a></li>
-                    <li><a [routerLink]="['question']">Create Question</a></li>
                     <li><a [routerLink]="['playground']">Playground</a></li>
                 </ul>
             </div>
@@ -32,6 +31,4 @@ import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmati
         ConfirmationModel
     ]
 })
-export class AppComponent { 
-    title: string = "Interview App";
-}
+export class AppComponent { }

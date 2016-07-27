@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
-import { SearchQuestionsComponent } from './../../search/search.component';
+import { SearchQuestionsComponent } from './../search/search.component';
 import { QuestionService } from './../services/question.service';
 
 @Component({
@@ -12,7 +12,8 @@ import { QuestionService } from './../services/question.service';
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, SearchQuestionsComponent]
 })
 export class QuestionListComponent implements OnInit {
-    pageTitle: string = "Existing Questions"
+    pageTitle: string = "Existing Questions";
+    pageSubTitle: string;
     public searchName = "questions";
     public questions: any;
     noResults: boolean;
@@ -20,6 +21,7 @@ export class QuestionListComponent implements OnInit {
     constructor(private _questionService: QuestionService) { }
 
     manageSearchEvent(event: any) {
+        this.pageSubTitle = "Search Results";
         this.questions = event.value;
         if (this.questions == undefined) {
             this.noResults = true;
@@ -31,6 +33,7 @@ export class QuestionListComponent implements OnInit {
     }
 
     getQuestions() {
+        this.pageSubTitle = "All Available Questions";
         this._questionService.getQuestions()
             .subscribe(
                 (questions) => this.questions = questions,

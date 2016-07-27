@@ -1,6 +1,6 @@
 import { provideRouter, RouterConfig }  from '@angular/router';
 
-import { QuestionListComponent } from './manage-questions/question-list/question-list.component';
+import { QuestionListComponent } from './question-list/question-list.component';
 import { QuestionComponent } from './manage-questions/create-edit-question/question.component';
 import { PlaygroundComponent } from './playground/playground.component';
 
