@@ -1,9 +1,23 @@
 <div class="row">
     <div class="col-sm-12">
+        <h1 class="page-header">
+            {{pageTitle}}
+            <button 
+                type="text"
+                [routerLink]="['/question']"
+                class="btn btn-primary pull-right">
+                Create New Question</button>
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
         <div class="form-group">
-            <search-questions 
-            (searchingEventChange)="manageQuestionSearchEvent($event)">
-            </search-questions>
+            <search 
+            [searchType]="searchName"
+            (searchingEvent)="manageSearchEvent($event)">
+            </search>
         </div>
     </div>
 
@@ -12,7 +26,16 @@
         (manageUserInteration)="canDeleteContent($event);">
     </confirmation>
 
-    <div *ngIf="!isSearching">
+    <div *ngIf="noResults">
+        <div class="col-sm-12">
+            <h2>No questions found.</h2>
+            <button class="btn btn-primary" 
+                [routerLink]="['/question']">Create New Question
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="!noResults">
         <div class="col-sm-12">
 
             <h2>All Available Questions</h2>

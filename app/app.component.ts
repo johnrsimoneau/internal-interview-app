@@ -4,6 +4,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
 import { QuestionService } from './manage-questions/services/question.service';
+import { SearchService } from './search/search.service';
 import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmation/confirmation.service';
 
 @Component({
@@ -18,15 +19,7 @@ import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmati
                 </ul>
             </div>
         </div>
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="page-header">{{title}}</h1>
-                </div>
-            </div>
-        </div>
-
+    
         <div class="container">
             <router-outlet></router-outlet>
         </div>
@@ -34,6 +27,7 @@ import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmati
     directives: [ROUTER_DIRECTIVES],
     providers: [
         QuestionService,
+        SearchService,
         ConfirmationService,
         ConfirmationModel
     ]

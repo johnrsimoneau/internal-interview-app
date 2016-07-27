@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
-import { SearchQuestionsComponent } from './../question-search/search.component';
+import { SearchQuestionsComponent } from './../../search/search.component';
 import { QuestionService } from './../services/question.service';
 
 @Component({
@@ -12,26 +12,34 @@ import { QuestionService } from './../services/question.service';
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, SearchQuestionsComponent]
 })
 export class QuestionListComponent implements OnInit {
-    questions: any[];
-    // showConfirmation: boolean = false;
-    public isSearching = false;
+    pageTitle: string = "Existing Questions"
+    public searchName = "questions";
+    public questions: any;
+    noResults: boolean;
 
     constructor(private _questionService: QuestionService) { }
 
-    manageQuestionSearchEvent(event: any) {
-        this.isSearching = event.value;
+    manageSearchEvent(event: any) {
+        this.questions = event.value;
+        if (this.questions == undefined) {
+            this.noResults = true;
+        } else if (this.questions == "cleared") {
+            this.questions = undefined;
+            this.noResults = null;
+            this.getQuestions();
+        }
     }
 
-    removeQuestion(id:string) {
-        this._questionService.deleteQuestion(id);
-    }
-
-    ngOnInit() { 
+    getQuestions() {
         this._questionService.getQuestions()
             .subscribe(
                 (questions) => this.questions = questions,
                 (err) => { console.log(err); }
             );
+    }
+
+    ngOnInit() { 
+        this.getQuestions();
     }
 
 }

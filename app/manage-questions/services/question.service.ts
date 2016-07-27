@@ -19,20 +19,6 @@ export class QuestionService {
             .catch(this._handleError);
     }
 
-    getQuestionsBySearchTerm(term: string) {
-        let apiUrl = 'http://localhost:1313/api/';
-        let params: string = [
-          'questions',
-          'search',
-          `${term}`  
-        ].join('/');
-        let queryUrl: string = apiUrl + params;
-        
-        return this._http.get(queryUrl)
-            .map(this._extractData)
-            .catch(this._handleError);
-    }
-
     getQuestionToEdit(id:string) {
         var editQuestionUrl = URL_QUESTIONS + '/' + id;
         return this._http.get(editQuestionUrl)

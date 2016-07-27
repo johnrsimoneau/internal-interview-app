@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-sm-12">
+        <form>
+            <label for="search">Search all {{searchType}}</label>
+            <div class="input-group">
+                <input
+                    #searchInput
+                    type="text" 
+                    id="search" 
+                    class="form-control" 
+                    placeholder="Search available {{searchType}}"
+                    (keyup)="searchContent(searchInput.value)">
+                <span class="input-group-btn">
+                    <input 
+                        type="reset" 
+                        class="btn btn-default" 
+                        value="Clear"
+                        (click)="clearQuestionSearchResults()"
+                        [disabled]="!searchInput.value">
+                </span>    
+            </div>         
+        </form>
+    </div>
+</div>
