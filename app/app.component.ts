@@ -13,7 +13,7 @@ import { ConfirmationService, ConfirmationModel } from './confirmation/confirmat
         <div class="navbar navbar-inverse">
             <div class="container">
                 <ul class="nav navbar-nav">
-                    <li><a [routerLink]="['question-list']">Questions</a></li>
+                    <li><a [routerLink]="['existing-questions']">Questions</a></li>
                     <li><a [routerLink]="['playground']">Playground</a></li>
                 </ul>
             </div>

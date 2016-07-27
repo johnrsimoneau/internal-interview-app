@@ -7,8 +7,8 @@ import { QuestionService } from './../services/question.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'question-list',
-    templateUrl: 'question-list.component.html',
+    selector: 'existing-questions',
+    templateUrl: 'existing-questions.component.html',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, SearchQuestionsComponent]
 })
 export class QuestionListComponent implements OnInit {

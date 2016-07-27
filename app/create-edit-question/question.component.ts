@@ -69,7 +69,7 @@ export class QuestionComponent implements OnInit {
         this.showConfirmation = false;
         if ( this.canDelete ) {
             this._questionService.deleteQuestion(this.id);
-            this._router.navigate(['./question-list']);
+            this._router.navigate(['./existing-questions']);
         }
     }
 
@@ -87,7 +87,7 @@ export class QuestionComponent implements OnInit {
         if( !this.id ) {
             if (this.questionForm.valid) {
                 this._questionService.postQuestion(form);
-                this._router.navigate(['./question-list']);
+                this._router.navigate(['./existing-questions']);
             } else {
                 this.clickedSubmit = true;
                 return;
@@ -95,7 +95,7 @@ export class QuestionComponent implements OnInit {
         } else {
              if (this.questionForm.valid) {
                 this._questionService.putQuestion(this.id, form);
-                this._router.navigate(['./question-list']);
+                this._router.navigate(['./existing-questions']);
             } else {
                 this.clickedSubmit = true;
                 return;
