@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { QuestionService } from './services/question.service';
 import { SearchService } from './search/search.service';
-import { ConfirmationService, ConfirmationModel } from './ui-contents/confirmation/confirmation.service';
+import { ConfirmationService, ConfirmationModel } from './confirmation/confirmation.service';
 
 @Component({
     selector: 'interview-app',

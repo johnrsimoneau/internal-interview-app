@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormBuilder, FormControl, AbstractControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
-import { ConfirmationComponent } from './../../ui-contents/confirmation/confirmation.component';
+import { ConfirmationComponent } from './../confirmation/confirmation.component';
 import { AnswersComponent } from './answers/answers.component';
 import { TagsComponent } from './tags/tags.component';
 
 import { TagService } from './tags/tag.service';
-import { QuestionService } from './../../services/question.service';
-import { ConfirmationService, ConfirmationModel } from './../../ui-contents/confirmation/confirmation.service';
+import { QuestionService } from './../services/question.service';
+import { ConfirmationService, ConfirmationModel } from './../confirmation/confirmation.service';
 
 @Component({
     moduleId: module.id,
