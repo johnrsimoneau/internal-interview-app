@@ -4,9 +4,9 @@ import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
 import { ConfirmationComponent } from './../confirmation/confirmation.component';
 import { AnswersComponent } from './answers/answers.component';
-import { TagsComponent } from './tags/tags.component';
+import { TagsComponent } from './../tags/tags.component';
 
-import { TagService } from './tags/tag.service';
+import { TagService } from './../tags/tag.service';
 import { QuestionService } from './../services/question.service';
 import { ConfirmationService, ConfirmationModel } from './../confirmation/confirmation.service';
 
