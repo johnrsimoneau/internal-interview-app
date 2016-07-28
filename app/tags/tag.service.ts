@@ -12,11 +12,11 @@ export class TagService {
         let body = res.json();
         return body || [];
     }
-
-    searchTags(term:string): Observable<string[]> {
+    
+    searchTags(term:string, tagType: string): Observable<string[]> {
         let apiUrl = "http://localhost:1313/api/"
         let params: string = [
-            `questionTags`,
+            `${tagType}`,
             `search`,
             `${term}`
         ].join('/');
@@ -25,7 +25,6 @@ export class TagService {
         return this._http.get(queryUrl)
             .map(this._extractData)
             .catch(this.handleError);
-
     }
 
     handleError(err:any) {

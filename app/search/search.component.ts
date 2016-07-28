@@ -19,7 +19,6 @@ export class SearchQuestionsComponent {
     constructor(private _searchService: SearchService) { }
 
     searchContent(term:string) {
-        this.searchType; // questions or templates
         if (term.length == 0 || term.length == undefined) {
             this.clearQuestionSearchResults(term);
             return false;

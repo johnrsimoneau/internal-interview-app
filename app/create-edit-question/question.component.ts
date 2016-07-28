@@ -29,6 +29,7 @@ import { ConfirmationService, ConfirmationModel } from './../confirmation/confir
 export class QuestionComponent implements OnInit {
     id: string;
     public showConfirmation: boolean;
+    selectedTags: string[];
     canDelete: boolean;
     pageTitle: string;
     buttonTitle: string;
@@ -37,6 +38,7 @@ export class QuestionComponent implements OnInit {
     questionForm: FormGroup;
     questionDetail: any;
     clickedSubmit = false;
+
 
     constructor(private fb: FormBuilder, 
         private _questionService: QuestionService,
@@ -49,10 +51,10 @@ export class QuestionComponent implements OnInit {
     }
 
     public answers: any[] = [];
-    public tags: any[];
+    public tagName: string = "questionTags";
 
     enteredAnswers: string[] = [];
-    enteredTags: any[] = [];
+    // enteredTags: any[] = [];
 
     manageAnswersChange(event:any) {
         this.answers = event.value;
@@ -60,9 +62,11 @@ export class QuestionComponent implements OnInit {
     }
 
     manageSelectedTags(event: any) {
-        this.tags = event.value;
-        this.enteredTags = this.tags;
+        console.log(event.value);
+        this.selectedTags.push(event.value);
+        console.log(this.selectedTags)
     }
+
 
     canDeleteContent(event: any) {
         this.canDelete = event.value;
@@ -104,7 +108,6 @@ export class QuestionComponent implements OnInit {
     }
 
     ngOnInit() {
-
         this.pageTitle = this.id ? "Edit Question" : "Create Question";
         this.buttonTitle = this.id ? "Save Changes" : "Submit Question";
 
@@ -139,7 +142,7 @@ export class QuestionComponent implements OnInit {
                     // Tags
                     (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
                     (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
-                    this.tags = this.questionDetail[0].tags;
+                    this.selectedTags = this.questionDetail[0].tags;
 
                     // Answers
                     (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);

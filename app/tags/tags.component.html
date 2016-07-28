@@ -1,32 +1,39 @@
-<div class="row">
-    <div class="col-sm-3">
-        <div class="form-group">
-            <label for="tagSearch">Tag Search (Click to add tags).</label>
-            <input 
-                type="text" 
-                class="form-control" 
-                #tagSearchInput 
-                (keyup)="searchTags(tagSearchInput.value)">
-            <p class="help-text min-height" *ngIf="noResults">No results found.</p>
-        </div>
-         <ul id="tags" class="available-tags">
-            <li *ngFor="let tag of availableTags; let i = index;"
-                value="{{tag.tag}}"
-                (click)="addTag(tag.tag)">
-                {{tag.tag}}
-            </li>
-        </ul>
+<div class="form-group">
+    <label for="tagSearch">Tag Search (Click to add tags).</label>
+    <div class="input-group">
+        <input 
+            type="text" 
+            class="form-control" 
+            #tagSearchInput 
+            (keyup)="searchTags(tagSearchInput.value)">
+        <span class="input-group-btn">
+            <input type="button"
+                class="btn btn-default"
+                value="add"
+                (click)="addToSelectedTags(tagSearchInput.value)"
+                [disabled]="!noResults">
+        </span>
     </div>
+    <p class="help-text min-height" [hidden]="!noResults">No results found.</p>
+</div>
 
-    <div class="col-sm-9" *ngIf="allTagsArray">
-        <label>Selected Tags</label>
-        <div class="tag-list">
-            <span class="tag" *ngFor="let selectedTag of allTagsArray; let i = index;">
-                {{selectedTag}} 
-                <a class="btn btn-sm" (click)="removeTag(selectedTag)">
-                    <i class="glyphicon glyphicon-remove-circle"></i>
-                </a>
-            </span>
-        </div>
+<ul id="tags" class="available-tags" [hidden]="noResults">
+    <li *ngFor="let tag of availableTags; let i = index;"
+        value="{{tag.tag}}"
+        (click)="addToSelectedTags(tag.tag)">
+        {{tag.tag}}
+    </li>
+</ul>
+
+
+<div class="col-sm-9" *ngIf="selectedTags">
+    <label>Selected Tags</label>
+    <div class="tag-list">
+        <span class="tag" *ngFor="let selectedTag of selectedTags; let i = index;">
+            {{selectedTag}} 
+            <a class="btn btn-sm" (click)="removeTag(selectedTag)">
+                <i class="glyphicon glyphicon-remove-circle"></i>
+            </a>
+        </span>
     </div>
 </div>

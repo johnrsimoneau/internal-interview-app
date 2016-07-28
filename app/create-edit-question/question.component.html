@@ -46,7 +46,7 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label for="technology">Technology</label>
                 <input 
@@ -88,16 +88,16 @@
     <div class="row">
         <div class="col-sm-12">
             <tags 
-                [allTagsArray]="tags"
-                (selectedTagsChange)="manageSelectedTags($event)">
+                [tagType]="tagName"
+                (tagEvent)="manageSelectedTags($event)">
             </tags>
             <input 
-                type="hidden"
+                type="text"
                 class="form-control"
-                [ngModel]="tags"
+                [ngModel]="selectedTags"
                 id="questionTags"
                 formControlName="tags">
-                 <div *ngIf="enteredTags.length == 0 && clickedSubmit" 
+                 <div *ngIf="selectedTags && clickedSubmit" 
                     class="alert alert-danger">
                     You must select at least one tag.
                 </div>

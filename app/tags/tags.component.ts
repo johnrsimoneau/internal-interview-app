@@ -1,10 +1,4 @@
-import { 
-    Component, 
-    OnInit, 
-    Input,
-    Output,
-    EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { TagService } from './tag.service';
@@ -15,54 +9,54 @@ import { TagService } from './tag.service';
     templateUrl: 'tags.component.html'
 })
 export class TagsComponent {
-    @Input() allTagsArray:any = [''];
-    @Output() selectedTagsChange = new EventEmitter();
-
-    availableTags: Array<any>
-    noResults: boolean = false;
+    @Input() tagType: string;
+    @Output() tagEvent = new EventEmitter();
+    availableTags: any;
+    selectedTags: string[];
+    noResults: boolean;
 
     constructor( private _tagService: TagService ) { }
 
     searchTags(term: string) {
         this.noResults = false;
         if (!term.length) {
-            this.availableTags = Array<string>()
-        } else {
-
-            this._tagService
-                .searchTags(term)
-                .filter(text => term.length >= 2)
-                .debounceTime(400)
-                .distinctUntilChanged()
-                .subscribe(
-                    availableTags => {
-                        if (availableTags.length) {
-                            this.availableTags = availableTags  
-                        } else {
-                            this.noResults = true;
-                        }
-                    }
-                )
-            
+            this.availableTags = Array<string>();
+            return;
         }
+
+        this._tagService
+            .searchTags(term, this.tagType)
+            .filter(text => term.length >= 2)
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .subscribe(
+                availableTags => {
+                    if (availableTags.length) {
+                        this.availableTags = availableTags  
+                    } else {
+                        this.noResults = true;
+                    }
+                }
+            );
     }
 
+    addNewTag(term: string) {
+        console.log(term);
+        this.addToSelectedTags(term);
+    }
 
-    addTag(tag:string) {
-        if (this.allTagsArray == undefined) {
-            this.allTagsArray = [];
-        }
-        this.allTagsArray.push(tag);
-        this.selectedTagsChange.emit({
-            value: this.allTagsArray
+    addToSelectedTags(tag:string) {
+        this.selectedTags.push(tag);
+        this.tagEvent.emit({
+            value: tag
         });
     }
 
     removeTag(value: string) {
-        var indexOfTag = this.allTagsArray.indexOf(value);
-        this.allTagsArray.splice(indexOfTag, 1);
-        this.selectedTagsChange.emit({
-            value: this.allTagsArray
+        var indexOfTag = this.selectedTags.indexOf(value);
+        this.selectedTags.splice(indexOfTag, 1);
+        this.tagEvent.emit({
+            value: this.selectedTags
         });
     }
 
