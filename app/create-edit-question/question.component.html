@@ -89,10 +89,11 @@
         <div class="col-sm-12">
             <tag 
                 [tagType]="tagName"
+                [tagArrayFromServer]="selectedTags"
                 (tagEvent)="manageSelectedTags($event)">
             </tag>
             <input 
-                type="text"
+                type="hidden"
                 #selectedTagsInput
                 class="form-control"
                 [ngModel]="selectedTags"

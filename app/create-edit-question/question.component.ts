@@ -36,6 +36,7 @@ export class QuestionComponent implements OnInit {
     questionForm: FormGroup;
     questionDetail: any;
     clickedSubmit = false;
+    selectedTagsFromServer: any = '';
 
     constructor(private fb: FormBuilder, 
         private _questionService: QuestionService,
@@ -86,7 +87,6 @@ export class QuestionComponent implements OnInit {
                 this._router.navigate(['./existing-questions']);
             } else {
                 this.clickedSubmit = true;
-                console.log(form);
                 return;
             }
         } else {
@@ -112,7 +112,7 @@ export class QuestionComponent implements OnInit {
             tags: ['', Validators.required],
             answers: []
         }); 
-
+        this.id ? this.selectedTagsFromServer = this.selectedTags : this.selectedTagsFromServer = '';
         if (!this.id) { return; }
 
         this._questionService.getQuestionToEdit(this.id)
@@ -130,7 +130,7 @@ export class QuestionComponent implements OnInit {
                     // Tags
                     (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
                     (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
-                    // this.selectedTags = this.questionDetail[0].tags;
+                    this.selectedTags = this.questionDetail[0].tags;
                     // Answers
                     (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
                     (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();

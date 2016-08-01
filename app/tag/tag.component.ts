@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, DoCheck, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { TagService } from './tag.service';
 import { TagFilterPipe } from './tag-filter.pipe';
@@ -6,18 +6,26 @@ import { TagFilterPipe } from './tag-filter.pipe';
 @Component({
     moduleId: module.id,
     selector: 'tag',
-    templateUrl: 'tag.component.html',
-    pipes: [TagFilterPipe]
+    templateUrl: 'tag.component.html'
 })
 export class TagComponent implements OnInit {
     @Input() tagType: string;
+    @Input() tagArrayFromServer: any = '';
     @Output() tagEvent = new EventEmitter();
     selectedTags: string[] = [];
     availableTags: any[] = [];
     foundTags: string[] = [];
     noResults: boolean = true;
 
-    constructor(private _tagService: TagService) { }
+    constructor(private _tagService: TagService, private _cdr: ChangeDetectorRef ) { }
+
+     ngDoCheck() {
+        if (this.tagArrayFromServer != '') {
+            this.selectedTags = this.tagArrayFromServer;
+        }
+        this._cdr.detectChanges();
+    }
+
 
     ngOnInit() {
         this._tagService.getTags(this.tagType)

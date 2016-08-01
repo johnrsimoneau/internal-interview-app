@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit,  Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { TagService } from './tag.service';
 
@@ -9,15 +9,19 @@ import { TagService } from './tag.service';
 })
 export class TagComponent implements OnInit {
     @Input() tagType: string;
+    @Input() tagArrayFromServer: any = '';
     @Output() tagEvent = new EventEmitter();
     selectedTags: string[] = [];
     availableTags: any[] = [];
     foundTags: string[] = [];
     noResults: boolean = true;
 
+
     constructor(private _tagService: TagService) { }
 
+    
     ngOnInit() {
+
         this._tagService.getTags(this.tagType)
             .map(i => i.tag)
             .subscribe((tags) => { 

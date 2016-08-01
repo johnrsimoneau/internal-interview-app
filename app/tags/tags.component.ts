@@ -41,7 +41,6 @@ export class TagsComponent {
     }
 
     addNewTag(term: string) {
-        console.log(term);
         this.addToSelectedTags(term);
     }
 

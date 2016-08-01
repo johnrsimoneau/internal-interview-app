@@ -24,8 +24,8 @@
         (click)="addToSelectedTags(foundTag)">{{foundTag}}</li>
 </ul>
 
-<div [hidden]="!selectedTags.length">
-    <p>Selected Tags Testing</p>
+<div [hidden]="!selectedTags">
+    <label>Selected Tags</label>
     <div class="selectedTags">
         <span *ngFor="let selectedTag of selectedTags; let i = index;">
             {{selectedTag}} <a (click)="addBackToAvailableTags(i)"><i class="glyphicon glyphicon-remove-circle"></i></a>
