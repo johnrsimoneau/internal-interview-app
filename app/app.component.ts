@@ -3,6 +3,7 @@ import { ROUTER_DIRECTIVES, provideRouter, RouterConfig } from '@angular/router'
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
+import { TagService } from './tag/tag.service';
 import { QuestionService } from './services/question.service';
 import { SearchService } from './search/search.service';
 import { ConfirmationService, ConfirmationModel } from './confirmation/confirmation.service';
@@ -25,6 +26,7 @@ import { ConfirmationService, ConfirmationModel } from './confirmation/confirmat
     `,
     directives: [ROUTER_DIRECTIVES],
     providers: [
+        TagService,
         QuestionService,
         SearchService,
         ConfirmationService,

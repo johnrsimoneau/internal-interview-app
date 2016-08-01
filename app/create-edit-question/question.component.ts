@@ -4,9 +4,9 @@ import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
 import { ConfirmationComponent } from './../confirmation/confirmation.component';
 import { AnswersComponent } from './answers/answers.component';
-import { TagsComponent } from './../tags/tags.component';
+import { TagComponent } from './../tag/tag.component';
 
-import { TagService } from './../tags/tag.service';
+import { TagService } from './../tag/tag.service';
 import { QuestionService } from './../services/question.service';
 import { ConfirmationService, ConfirmationModel } from './../confirmation/confirmation.service';
 
@@ -20,15 +20,13 @@ import { ConfirmationService, ConfirmationModel } from './../confirmation/confir
         REACTIVE_FORM_DIRECTIVES,
         AnswersComponent,
         ConfirmationComponent,
-        TagsComponent
-    ],
-    providers: [
-        TagService,
+        TagComponent
     ]
 })
 export class QuestionComponent implements OnInit {
     id: string;
     public showConfirmation: boolean;
+    tagName = "questionTags";
     selectedTags: string[];
     canDelete: boolean;
     pageTitle: string;
@@ -38,7 +36,6 @@ export class QuestionComponent implements OnInit {
     questionForm: FormGroup;
     questionDetail: any;
     clickedSubmit = false;
-
 
     constructor(private fb: FormBuilder, 
         private _questionService: QuestionService,
@@ -51,10 +48,8 @@ export class QuestionComponent implements OnInit {
     }
 
     public answers: any[] = [];
-    public tagName: string = "questionTags";
 
     enteredAnswers: string[] = [];
-    // enteredTags: any[] = [];
 
     manageAnswersChange(event:any) {
         this.answers = event.value;
@@ -62,11 +57,8 @@ export class QuestionComponent implements OnInit {
     }
 
     manageSelectedTags(event: any) {
-        console.log(event.value);
-        this.selectedTags.push(event.value);
-        console.log(this.selectedTags)
+        this.selectedTags = event.value;
     }
-
 
     canDeleteContent(event: any) {
         this.canDelete = event.value;
@@ -94,6 +86,7 @@ export class QuestionComponent implements OnInit {
                 this._router.navigate(['./existing-questions']);
             } else {
                 this.clickedSubmit = true;
+                console.log(form);
                 return;
             }
         } else {
@@ -120,9 +113,7 @@ export class QuestionComponent implements OnInit {
             answers: []
         }); 
 
-        if (!this.id) {
-            return;
-        }
+        if (!this.id) { return; }
 
         this._questionService.getQuestionToEdit(this.id)
             .subscribe(
@@ -130,20 +121,16 @@ export class QuestionComponent implements OnInit {
                     // Text
                     (<FormControl>this.questionForm.controls['text']).updateValue(this.questionDetail[0].text);
                     (<FormControl>this.questionForm.controls['text']).updateValueAndValidity();
-
                     // Tech
                     (<FormControl>this.questionForm.controls['tech']).updateValue(this.questionDetail[0].tech);
                     (<FormControl>this.questionForm.controls['tech']).updateValueAndValidity();     
-
                     // Level
                     (<FormControl>this.questionForm.controls['level']).updateValue(this.questionDetail[0].level);
                     (<FormControl>this.questionForm.controls['level']).updateValueAndValidity();
-
                     // Tags
                     (<FormControl>this.questionForm.controls['tags']).updateValue(this.questionDetail[0].tags);
                     (<FormControl>this.questionForm.controls['tags']).updateValueAndValidity();
-                    this.selectedTags = this.questionDetail[0].tags;
-
+                    // this.selectedTags = this.questionDetail[0].tags;
                     // Answers
                     (<FormControl>this.questionForm.controls['answers']).updateValue(this.questionDetail[0].answers);
                     (<FormControl>this.questionForm.controls['answers']).updateValueAndValidity();

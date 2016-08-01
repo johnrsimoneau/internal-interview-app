@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { TagService } from './tag.service';
+import { TagFilterPipe } from './tag-filter.pipe';
 
 @Component({
     moduleId: module.id,
     selector: 'tag',
-    templateUrl: 'tag.component.html'
+    templateUrl: 'tag.component.html',
+    pipes: [TagFilterPipe]
 })
 export class TagComponent implements OnInit {
     @Input() tagType: string;

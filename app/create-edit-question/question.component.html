@@ -87,17 +87,19 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <tags 
+            <tag 
                 [tagType]="tagName"
                 (tagEvent)="manageSelectedTags($event)">
-            </tags>
+            </tag>
             <input 
                 type="text"
+                #selectedTagsInput
                 class="form-control"
                 [ngModel]="selectedTags"
+                value="{{ selectedTags }}"
                 id="questionTags"
                 formControlName="tags">
-                 <div *ngIf="selectedTags && clickedSubmit" 
+                 <div *ngIf="selectedTagsInput.value == '' && clickedSubmit" 
                     class="alert alert-danger">
                     You must select at least one tag.
                 </div>
