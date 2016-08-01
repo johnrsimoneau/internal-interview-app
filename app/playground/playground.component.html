@@ -1,9 +1,16 @@
 <h2>Playground</h2>
 <p>Testing various pieces of the app here.</p>
 
-<input type="radio" [checked]="isPreferred">
+<!--<input type="radio" [checked]="isPreferred">-->
 
-<parent></parent>
+<!--<parent></parent>
 <complex-form></complex-form>
 <form-one></form-one>
-<answers></answers>
+<answers></answers>-->
+<tag [tagType]="tagName" 
+    (tagEvent)="manageSelectedTags($event)"></tag>
+
+<input 
+    type="text" 
+    class="form-control" 
+    value="{{ selectedTags }}">

@@ -16,7 +16,7 @@ import { ChildComponent } from './child/child.component';
 export class ParentComponent {
     public selectedTags:string[] = [];
     manageTagArray(event:any) {
-        this.selectedTags = event.value;
+        this.selectedTags.push(event.value);
         console.log(this.selectedTags);
     }
 }

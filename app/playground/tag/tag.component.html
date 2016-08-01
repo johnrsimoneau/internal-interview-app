@@ -1,0 +1,33 @@
+<div class="form-group">
+    <label for="tagSearch">Search Tags</label>
+    <div class="input-group">
+        <input type="text"
+            #tagInput
+            class="form-control"
+            placeholder="Search for tags"
+            (keyup)="filterTags(tagInput.value)"
+            (click)="clearTextbox(tagInput)">
+        <span class="input-group-btn">
+            <button type="button"
+                (click)="addNewTag(tagInput.value)"
+                class="btn btn-default"
+                [disabled]="noResults">Add New Tag</button>
+        </span>
+    </div>
+    <p [hidden]="noResults" class="help-text">To create a new tag, click the "Add New Tag" button.</p>
+</div>
+
+<!-- | tagFilter:tagInput.value; -->
+<ul *ngIf="tagInput.value.length">
+    <li *ngFor="let foundTag of foundTags; let i = index;"
+        (change)="checkIfNoAvailbleTags(i)"
+        (click)="addToSelectedTags(foundTag)">{{foundTag}}</li>
+</ul>
+
+<div [hidden]="!selectedTags.length">
+    <p>Selected Tags</p>
+    <ul class="selectedTags">
+        <li *ngFor="let selectedTag of selectedTags; let i = index;"
+            (click)="addBackToAvailableTags(i)">{{selectedTag}}</li>
+    </ul>
+</div>

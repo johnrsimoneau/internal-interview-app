@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ParentComponent } from './parent/parent.component';
+// import { ParentComponent } from './parent/parent.component';
+import { TagComponent } from './tag/tag.component';
+
+import { TagService } from './tag/tag.service';
+
 
 // import { FormOneComponent } from './example-form/form-one.component';
 // import { ComplexFormComponent } from './complex-form/complex-form.component';
@@ -10,11 +14,17 @@ import { ParentComponent } from './parent/parent.component';
     selector: 'playground',
     templateUrl: 'playground.component.html',
     directives: [
-        ParentComponent
-    ]
+        TagComponent
+        //ParentComponent
+    ],
+    providers: [TagService]
 })
 export class PlaygroundComponent implements OnInit {
-    isPreferred:boolean = true;
+    tagName = "questionTags";
+    selectedTags: string[] = [];
+    manageSelectedTags(event:any) {
+        this.selectedTags = event.value;
+    }
     constructor() { }
 
     ngOnInit() { }
