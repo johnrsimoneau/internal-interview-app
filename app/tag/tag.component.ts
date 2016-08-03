@@ -29,28 +29,11 @@ export class TagComponent implements OnInit {
 
     ngOnInit() {
 
-        /*
-        if (!this.selectedTags) {
-            this._tagService.getTags(this.tagType)
-                .map(i => i.tag)
-                .filter(x => this.selectedTags.indexOf(x) == -1)
-                .subscribe((tags) => { 
-                    this.availableTags.push(tags);
-                },
-                (err) => { console.log(err); }); 
-        } else {
-            this._tagService.getTags(this.tagType)
-                .map(i => i.tag)
-                .subscribe((tags) => { 
-                    this.availableTags.push(tags);
-                },
-                (err) => { console.log(err); }); 
-        }
-        */
-
         this._tagService.getTags(this.tagType)
             .map(i => i.tag)
-            .filter(x => this.selectedTags.indexOf(x) == -1)
+            .filter(
+                x => this.selectedTags ? this.selectedTags.indexOf(x) == -1 : true
+            )
             .subscribe((tags) => { 
                 this.availableTags.push(tags);
             },
