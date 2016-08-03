@@ -24,7 +24,7 @@
         (click)="addToSelectedTags(foundTag)">{{foundTag}}</li>
 </ul>
 
-<div [hidden]="!selectedTags">
+<div [hidden]="!selectedTags || selectedTags.length == 0">
     <label>Selected Tags</label>
     <div class="selectedTags">
         <span *ngFor="let selectedTag of selectedTags; let i = index;">

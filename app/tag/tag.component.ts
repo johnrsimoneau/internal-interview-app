@@ -28,8 +28,12 @@ export class TagComponent implements OnInit {
 
 
     ngOnInit() {
+
         this._tagService.getTags(this.tagType)
             .map(i => i.tag)
+            .filter(
+                x => this.selectedTags ? this.selectedTags.indexOf(x) == -1 : true
+            )
             .subscribe((tags) => { 
                 this.availableTags.push(tags);
             },
@@ -46,18 +50,22 @@ export class TagComponent implements OnInit {
     }
     
     addToSelectedTags(tagValue: string) {
+        
         let indexOfAvailTags = this.availableTags.indexOf(tagValue);
         let indexOfFoundTags = this.foundTags.indexOf(tagValue);
         let toRemove: string;
+        
         this.foundTags.splice(indexOfFoundTags, 1);
-
         toRemove = this.availableTags.splice(indexOfAvailTags, 1).toString();
         this.availableTags = [...this.availableTags];
+        if (this.selectedTags == undefined) {
+            this.selectedTags = [];
+        }
         this.selectedTags.push(toRemove);
         this.foundTags = [...this.foundTags];
 
         this.tagEvent.emit({
-            value: this.selectedTags
+             value: this.selectedTags
         });
     }
 
