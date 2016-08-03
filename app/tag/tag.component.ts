@@ -50,6 +50,7 @@ export class TagComponent implements OnInit {
 
         this._tagService.getTags(this.tagType)
             .map(i => i.tag)
+            .filter(x => this.selectedTags.indexOf(x) == -1)
             .subscribe((tags) => { 
                 this.availableTags.push(tags);
             },
