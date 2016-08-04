@@ -1,25 +1,7 @@
-<h2>Answers</h2>
+<h2>Possible Answers</h2>
 <div class="row">
-    <div class="col-sm-4">
-        <div class="answer-template">
-            <h3>Create Answer</h3>
-            <div class="form-group">
-                <textarea #newAnswer class="form-control" id="answer"></textarea>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                <a class="btn btn-default" (click)="createAnswer(newAnswer.value, false); newAnswer.value=''">Add answer</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-8">
-        <h3>Possible Answers</h3>
-        <div *ngIf="!allAnswersArray.length">
-            <span>Enter at least one possible answer.</span>
-        </div>
-        <div class="individual-answers-container" *ngIf="allAnswersArray.length">
+    <div class="col-sm-12">
+        <div class="individual-answers-container">
             <div class="individual-answer" *ngFor="let answer of allAnswersArray; let i = index">
                 <div class="form-group">
                     <h4>Answer {{i + 1}}</h4>
@@ -33,17 +15,13 @@
                         </label>
                     <textarea #textarea (blur)="updateArrayText(i, textarea.value)" value="{{answer.text}}" class="form-control"></textarea>
                 </div>
-                <p class="actions pull-right">
+                <p class="actions pull-right" [hidden]="allAnswersArray.length == 1">
                     <a (click)="removeAnswer(i)"><i class="glyphicon glyphicon-trash"></i> Remove Answer</a>
                 </p>
             </div>
         </div>
     </div>
-
-    
+    <div class="col-sm-12">
+        <a (click)="createAnswer()">+ Add Another Answer</a>
+    </div>
 </div>
-
-
-
-
-

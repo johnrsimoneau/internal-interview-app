@@ -1,19 +1,20 @@
-import { 
-    Component, 
-    Input,
-    Output,
-    EventEmitter
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
     moduleId: module.id,
     selector: 'answers',
     templateUrl: 'answers.component.html'
 })
-export class AnswersComponent {
+export class AnswersComponent implements OnInit{
     
     @Input() allAnswersArray:any[] = [];
     @Output() manageAnswersChange = new EventEmitter();
+
+    ngOnInit() {
+        if (this.allAnswersArray.length == 0) {
+            this.allAnswersArray.push({'text': '', 'preferred': false });
+        }
+    }
 
     private _testIfPreferred():number {
         var findIndex:number;
@@ -25,9 +26,8 @@ export class AnswersComponent {
         return findIndex >= 0 ? findIndex : -1;
     }
 
-    createAnswer(text:string, preferred:boolean) {
-        var object = { text, preferred };
-        this.allAnswersArray.push(object);
+    createAnswer() {
+        this.allAnswersArray.push({ 'text': '', 'preferred': false });
         this.manageAnswersChange.emit({
             value: this.allAnswersArray
         });
