@@ -41,7 +41,13 @@ export class TagComponent implements OnInit {
     }
 
     addNewTag(tagName: string) {
+        if (this.selectedTags == undefined) {
+            this.selectedTags = [];
+        }
         this.selectedTags.push(tagName);
+        this.tagEvent.emit({
+             value: this.selectedTags
+        });
     }
 
     clearTextbox(input: any): string {

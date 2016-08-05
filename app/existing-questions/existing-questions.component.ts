@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
@@ -42,6 +42,10 @@ export class QuestionListComponent implements OnInit {
     }
 
     ngOnInit() { 
+        this.getQuestions();
+    }
+
+    ngAfterViewInit() {
         this.getQuestions();
     }
 
