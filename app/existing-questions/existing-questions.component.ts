@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
@@ -18,7 +18,7 @@ export class QuestionListComponent implements OnInit {
     public questions: any;
     noResults: boolean;
 
-    constructor(private _questionService: QuestionService) { }
+    constructor(private _questionService: QuestionService, private _applicationRef: ApplicationRef ) { }
 
     manageSearchEvent(event: any) {
         this.pageSubTitle = "Search Results";
@@ -34,18 +34,13 @@ export class QuestionListComponent implements OnInit {
 
     getQuestions() {
         this.pageSubTitle = "All Available Questions";
-        this._questionService.getQuestions()
-            .subscribe(
-                (questions) => this.questions = questions,
-                (err) => { console.log(err); }
-            );
+        this._questionService.getQuestions().subscribe((questions) => {
+            this.questions = questions;
+        }, (err) => { console.log(err); }
+        );
     }
 
-    ngOnInit() { 
-        this.getQuestions();
-    }
-
-    ngAfterViewInit() {
+    ngOnInit() {
         this.getQuestions();
     }
 

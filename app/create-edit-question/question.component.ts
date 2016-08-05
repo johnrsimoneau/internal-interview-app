@@ -85,6 +85,7 @@ export class QuestionComponent implements OnInit {
             if (this.questionForm.valid) {
                 this._questionService.postQuestion(form);
                 this._router.navigate(['./existing-questions']);
+                // window.location.reload();
             } else {
                 this.clickedSubmit = true;
                 return;
@@ -93,6 +94,7 @@ export class QuestionComponent implements OnInit {
              if (this.questionForm.valid) {
                 this._questionService.putQuestion(this.id, form);
                 this._router.navigate(['./existing-questions']);
+                // window.location.reload();
             } else {
                 this.clickedSubmit = true;
                 return;
